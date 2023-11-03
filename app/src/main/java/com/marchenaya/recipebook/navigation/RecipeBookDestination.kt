@@ -11,7 +11,12 @@ sealed class RecipeBookDestination(
     @StringRes val title: Int,
     val selectedIcon: ImageVector,
     val route: String
-)
+) {
+    companion object {
+        val bottomBarScreens = listOf(Home, Shopping, Settings)
+    }
+
+}
 
 object Home : RecipeBookDestination(
     title = com.marchenaya.home.R.string.home_title,
@@ -30,5 +35,3 @@ object Settings : RecipeBookDestination(
     selectedIcon = Icons.Rounded.Settings,
     route = "settings"
 )
-
-val recipeBookScreens = listOf(Home, Shopping, Settings)

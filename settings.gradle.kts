@@ -1,5 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":feature:recipe")
+
+
+include(":feature:search")
+
+
 include(":domain")
 
 

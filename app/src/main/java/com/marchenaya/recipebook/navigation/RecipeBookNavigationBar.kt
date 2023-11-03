@@ -17,21 +17,23 @@ fun RecipeBookNavigationBar(
     currentDestination: NavDestination?,
     onNavigateToDestination: (RecipeBookDestination) -> Unit
 ) {
-    NavigationBar {
-        destinations.forEach { destination ->
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        destination.selectedIcon,
-                        contentDescription = stringResource(destination.title)
-                    )
-                },
-                label = { Text(stringResource(destination.title)) },
-                selected = currentDestination?.hierarchy?.any { it.route == destination.route } == true,
-                onClick = {
-                    onNavigateToDestination(destination)
-                }
-            )
+    if (currentDestination?.route in destinations.map { it.route }) {
+        NavigationBar {
+            destinations.forEach { destination ->
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            destination.selectedIcon,
+                            contentDescription = stringResource(destination.title)
+                        )
+                    },
+                    label = { Text(stringResource(destination.title)) },
+                    selected = currentDestination?.hierarchy?.any { it.route == destination.route } == true,
+                    onClick = {
+                        onNavigateToDestination(destination)
+                    }
+                )
+            }
         }
     }
 }
