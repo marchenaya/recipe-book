@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.ui.text.google.fonts)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
