@@ -1,4 +1,4 @@
-package com.marchenaya.recipebook.ui.theme
+package com.marchenaya.recipebook.ui.main
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.marchenaya.recipebook.navigation.RecipeBookDestination
 import com.marchenaya.recipebook.navigation.RecipeBookNavHost
 import com.marchenaya.recipebook.navigation.RecipeBookNavigationBar
+import com.marchenaya.recipebook.ui.theme.RecipeBookTheme
 
 @Composable
 fun RecipeBookApp() {

@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -35,17 +36,27 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.4"
     }
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.material3)
     implementation(libs.ui.tooling.preview)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.hilt.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
