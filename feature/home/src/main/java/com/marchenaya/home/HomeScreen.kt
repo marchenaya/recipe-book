@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
@@ -56,7 +57,7 @@ fun HomeContentScreen(
             }
 
             is LoadState.Error -> {
-                RecipeBookText(text = "There is an error")
+                RecipeBookText(text = stringResource(R.string.error))
             }
 
             is LoadState.NotLoading -> {
@@ -64,12 +65,12 @@ fun HomeContentScreen(
                     LazyRow {
                         items(randomRecipesPagingItems.itemCount) { index ->
                             RecipeBookText(
-                                text = randomRecipesPagingItems[index]!!.title
+                                text = randomRecipesPagingItems[index]?.title ?: ""
                             )
                         }
                     }
                 } else {
-                    RecipeBookText(text = "There is no recipes")
+                    RecipeBookText(text = stringResource(R.string.empty_recipes))
                 }
             }
         }
