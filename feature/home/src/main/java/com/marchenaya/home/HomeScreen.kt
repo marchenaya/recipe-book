@@ -15,6 +15,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.domain.model.Recipe
 import kotlinx.coroutines.flow.flowOf
 
@@ -57,7 +58,7 @@ fun HomeContentScreen(
             }
 
             is LoadState.Error -> {
-                RecipeBookText(text = stringResource(R.string.error))
+                RecipeBookText(text = stringResource(com.marchenaya.core.R.string.error))
             }
 
             is LoadState.NotLoading -> {
@@ -70,7 +71,7 @@ fun HomeContentScreen(
                         }
                     }
                 } else {
-                    RecipeBookText(text = stringResource(R.string.empty_recipes))
+                    RecipeBookText(text = stringResource(com.marchenaya.core.R.string.empty_recipes))
                 }
             }
         }
@@ -88,16 +89,18 @@ fun RecipeBookText(text: String) {
 @Preview
 @Composable
 fun HomeContentScreenPreview() {
-    HomeContentScreen(
-        flowOf(
-            PagingData.from(
-                listOf(
-                    Recipe(
-                        1,
-                        "test",
-                        "image"
+    RecipeBookTheme {
+        HomeContentScreen(
+            flowOf(
+                PagingData.from(
+                    listOf(
+                        Recipe(
+                            1,
+                            "test",
+                            "image"
+                        )
                     )
                 )
-            )
-        ).collectAsLazyPagingItems(), {})
+            ).collectAsLazyPagingItems(), {})
+    }
 }
