@@ -36,13 +36,14 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":core"))
 
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))

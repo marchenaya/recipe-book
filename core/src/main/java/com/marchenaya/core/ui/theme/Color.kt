@@ -1,4 +1,4 @@
-package com.marchenaya.recipebook.ui.theme
+package com.marchenaya.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

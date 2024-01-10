@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace = "com.marchenaya.search"
-    compileSdk = 33
+    namespace = "com.marchenaya.core"
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -40,16 +40,15 @@ android {
 }
 
 dependencies {
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.material3)
-    implementation(libs.ui.tooling.preview)
+
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.material3)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.text.google.fonts)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    debugImplementation(libs.ui.tooling)
 }

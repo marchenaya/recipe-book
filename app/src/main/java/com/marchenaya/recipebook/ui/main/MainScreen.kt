@@ -8,10 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.recipebook.navigation.RecipeBookDestination
 import com.marchenaya.recipebook.navigation.RecipeBookNavHost
 import com.marchenaya.recipebook.navigation.RecipeBookNavigationBar
-import com.marchenaya.recipebook.ui.theme.RecipeBookTheme
 
 @Composable
 fun RecipeBookApp() {

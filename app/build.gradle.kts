@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packaging {
         resources {
@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:search"))
     implementation(project(":feature:recipe"))
+    implementation(project(":core"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -71,7 +72,6 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.ui.text.google.fonts)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
