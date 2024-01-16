@@ -22,6 +22,7 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
     NavHost(navController = navHostController, startDestination = Home.route, modifier = modifier) {
         composable(Home.route) {
             HomeScreen(
+                title = Home.title,
                 onSearchClick = { navHostController.navigate(searchRoute) },
                 onRecipeClick = { recipeId ->
                     navHostController.navigate("$ROUTING_RECIPE_PREFIX$recipeId")

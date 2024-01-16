@@ -1,5 +1,6 @@
 package com.marchenaya.home
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -15,10 +16,14 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.ui.component.RecipeBookCardList
+import com.marchenaya.core.ui.component.RecipeBookText
+import com.marchenaya.core.ui.theme.RecipeBookTheme
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun HomeScreen(
+    @StringRes title: Int,
     onSearchClick: () -> Unit,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
@@ -29,6 +34,7 @@ fun HomeScreen(
         viewModel.randomRecipesUiState.collectAsLazyPagingItems()
 
     HomeContentScreen(
+        title = title,
         randomRecipesPagingItems = randomRecipesPagingItems,
         onSearchClick = onSearchClick,
         onRecipeClick = onRecipeClick,
@@ -39,19 +45,20 @@ fun HomeScreen(
 
 @Composable
 fun HomeContentScreen(
+    @StringRes title: Int,
     randomRecipesPagingItems: LazyPagingItems<Recipe>,
     onSearchClick: () -> Unit,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column {
-        com.marchenaya.core.ui.component.RecipeBookText(
-            text = stringResource(id = R.string.home_title),
+        RecipeBookText(
+            text = stringResource(id = title),
             style = MaterialTheme.typography.titleLarge,
             modifier = modifier.padding(all = 16.dp)
         )
 
-        com.marchenaya.core.ui.component.RecipeBookCardList(
+        RecipeBookCardList(
             items = randomRecipesPagingItems,
             onRecipeClick
         )
@@ -66,8 +73,9 @@ fun HomeContentScreen(
 @Preview
 @Composable
 fun HomeContentScreenPreview() {
-    com.marchenaya.core.ui.theme.RecipeBookTheme {
+    RecipeBookTheme {
         HomeContentScreen(
+            R.string.home_title,
             flowOf(
                 PagingData.from(
                     MutableList(10) {
