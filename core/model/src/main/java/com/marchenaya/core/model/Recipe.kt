@@ -1,4 +1,4 @@
-package com.marchenaya.domain.model
+package com.marchenaya.core.model
 
 data class Recipe(
     val id: Int,

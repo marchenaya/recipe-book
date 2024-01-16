@@ -1,27 +1,26 @@
 package com.marchenaya.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.marchenaya.core.ui.theme.RecipeBookTheme
-import com.marchenaya.domain.model.Recipe
+import com.marchenaya.core.model.Recipe
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun HomeScreen(
     onSearchClick: () -> Unit,
+    onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -32,6 +31,7 @@ fun HomeScreen(
     HomeContentScreen(
         randomRecipesPagingItems = randomRecipesPagingItems,
         onSearchClick = onSearchClick,
+        onRecipeClick = onRecipeClick,
         modifier = modifier
     )
 
@@ -41,66 +41,43 @@ fun HomeScreen(
 fun HomeContentScreen(
     randomRecipesPagingItems: LazyPagingItems<Recipe>,
     onSearchClick: () -> Unit,
+    onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column {
-        Text(
-            text = "Hello HomeScreen!",
-            modifier = modifier
+        com.marchenaya.core.ui.component.RecipeBookText(
+            text = stringResource(id = R.string.home_title),
+            style = MaterialTheme.typography.titleLarge,
+            modifier = modifier.padding(all = 16.dp)
         )
+
+        com.marchenaya.core.ui.component.RecipeBookCardList(
+            items = randomRecipesPagingItems,
+            onRecipeClick
+        )
+
         Button(onClick = { onSearchClick() }) {
             Text(text = "Navigate to Search")
         }
 
-        when (randomRecipesPagingItems.loadState.refresh) {
-            LoadState.Loading -> {
-                CircularProgressIndicator()
-            }
-
-            is LoadState.Error -> {
-                RecipeBookText(text = stringResource(com.marchenaya.core.R.string.error))
-            }
-
-            is LoadState.NotLoading -> {
-                if (randomRecipesPagingItems.itemCount > 0) {
-                    LazyRow {
-                        items(randomRecipesPagingItems.itemCount) { index ->
-                            RecipeBookText(
-                                text = randomRecipesPagingItems[index]?.title ?: ""
-                            )
-                        }
-                    }
-                } else {
-                    RecipeBookText(text = stringResource(com.marchenaya.core.R.string.empty_recipes))
-                }
-            }
-        }
     }
-}
-
-@Composable
-fun RecipeBookText(text: String) {
-    Text(
-        text = text,
-        color = MaterialTheme.colorScheme.primary
-    )
 }
 
 @Preview
 @Composable
 fun HomeContentScreenPreview() {
-    RecipeBookTheme {
+    com.marchenaya.core.ui.theme.RecipeBookTheme {
         HomeContentScreen(
             flowOf(
                 PagingData.from(
-                    listOf(
+                    MutableList(10) {
                         Recipe(
                             1,
-                            "test",
-                            "image"
+                            stringResource(id = com.marchenaya.ui.R.string.card_text_preview),
+                            stringResource(id = com.marchenaya.ui.R.string.image_preview)
                         )
-                    )
+                    }
                 )
-            ).collectAsLazyPagingItems(), {})
+            ).collectAsLazyPagingItems(), {}, {})
     }
 }

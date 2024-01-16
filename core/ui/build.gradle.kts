@@ -2,12 +2,10 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.marchenaya.data"
+    namespace = "com.marchenaya.ui"
     compileSdk = 34
 
     defaultConfig {
@@ -26,14 +24,6 @@ android {
             )
         }
     }
-    buildTypes.all {
-        buildConfigField("String", "BASE_URL", "\"https://api.spoonacular.com\"")
-        buildConfigField(
-            "String",
-            "API_KEY",
-            "\"c0c613f9a45745a4828644217fcfdf2e\""
-        )//TODO : Don't keep this key here
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,25 +32,31 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        buildConfig = true
+        compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
+
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":core:model"))
 
+    implementation(project(":core:model"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
-    implementation(libs.retrofit)
-    implementation(libs.gson)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    api(libs.converter.gson)
-    implementation(libs.androidx.paging.runtime.ktx)
-    implementation(libs.logging.interceptor)
+    implementation(libs.material3)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.text.google.fonts)
+    implementation(libs.coil.compose)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    debugImplementation(libs.ui.tooling)
 }

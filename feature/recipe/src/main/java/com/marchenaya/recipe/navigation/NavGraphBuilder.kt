@@ -7,13 +7,17 @@ import com.marchenaya.recipe.InstructionsScreen
 import com.marchenaya.recipe.RecipeScreen
 
 fun NavGraphBuilder.recipeGraph(onBackClick: () -> Unit, onInstructionsClick: () -> Unit) {
-    navigation(Recipe.route, recipeRoute) {
-        composable(Recipe.route) {
+    navigation(Recipe.baseRoute, RECIPE_ROUTE) {
+        composable(
+            route = Recipe.baseRoute,
+            arguments = Recipe.arguments
+        ) { navBackStackEntry ->
             RecipeScreen(
+                recipeId = navBackStackEntry.arguments?.getInt(ARG_KEY_RECIPE_ID),
                 onBackClick = { onBackClick() },
                 onInstructionsClick = { onInstructionsClick() })
         }
-        composable(Instructions.route) {
+        composable(Instructions.baseRoute) {
             InstructionsScreen(onBackClick = { onBackClick() })
         }
     }

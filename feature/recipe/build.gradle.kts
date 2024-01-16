@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core:ui"))
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.material3)

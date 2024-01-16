@@ -14,6 +14,7 @@ import com.marchenaya.search.navigation.searchGraph
 import com.marchenaya.search.navigation.searchRoute
 import com.marchenaya.settings.SettingsScreen
 import com.marchenaya.shopping.ShoppingScreen
+import com.marchenaya.core.ui.navigation.RecipeBookRoutable.Companion.navigate
 
 @Composable
 fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier = Modifier) {
@@ -21,7 +22,10 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
     NavHost(navController = navHostController, startDestination = Home.route, modifier = modifier) {
         composable(Home.route) {
             HomeScreen(
-                onSearchClick = { navHostController.navigate(searchRoute) }
+                onSearchClick = { navHostController.navigate(searchRoute) },
+                onRecipeClick = { recipeId ->
+                    navHostController.navigate(Recipe(recipeId))
+                }
             )
         }
         composable(Shopping.route) {
@@ -34,12 +38,12 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
             onFilterClick = {
                 navHostController.navigate(Filter.route)
             }, onRecipeClick = {
-                navHostController.navigate(Recipe.route)
+                navHostController.navigate(Recipe.baseRoute)
             }
         )
         recipeGraph(onBackClick = { onBackClick() },
             onInstructionsClick = {
-                navHostController.navigate(Instructions.route)
+                navHostController.navigate(Instructions.baseRoute)
             })
     }
 }

@@ -60,7 +60,7 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:search"))
     implementation(project(":feature:recipe"))
-    implementation(project(":core"))
+    implementation(project(":core:ui"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
