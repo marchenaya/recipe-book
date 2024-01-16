@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.marchenaya.home.HomeScreen
 import com.marchenaya.recipe.navigation.Instructions
+import com.marchenaya.recipe.navigation.ROUTING_RECIPE_PREFIX
 import com.marchenaya.recipe.navigation.Recipe
 import com.marchenaya.recipe.navigation.recipeGraph
 import com.marchenaya.search.navigation.Filter
@@ -14,7 +15,6 @@ import com.marchenaya.search.navigation.searchGraph
 import com.marchenaya.search.navigation.searchRoute
 import com.marchenaya.settings.SettingsScreen
 import com.marchenaya.shopping.ShoppingScreen
-import com.marchenaya.core.ui.navigation.RecipeBookRoutable.Companion.navigate
 
 @Composable
 fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier = Modifier) {
@@ -24,7 +24,7 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
             HomeScreen(
                 onSearchClick = { navHostController.navigate(searchRoute) },
                 onRecipeClick = { recipeId ->
-                    navHostController.navigate(Recipe(recipeId))
+                    navHostController.navigate("$ROUTING_RECIPE_PREFIX$recipeId")
                 }
             )
         }
@@ -38,12 +38,12 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
             onFilterClick = {
                 navHostController.navigate(Filter.route)
             }, onRecipeClick = {
-                navHostController.navigate(Recipe.baseRoute)
+                navHostController.navigate(Recipe.route)
             }
         )
         recipeGraph(onBackClick = { onBackClick() },
             onInstructionsClick = {
-                navHostController.navigate(Instructions.baseRoute)
+                navHostController.navigate(Instructions.route)
             })
     }
 }
