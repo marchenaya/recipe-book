@@ -1,5 +1,14 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":core:model")
+
+
+include(":core:ui")
+
+
+include(":core")
+
+
 include(":feature:recipe")
 
 

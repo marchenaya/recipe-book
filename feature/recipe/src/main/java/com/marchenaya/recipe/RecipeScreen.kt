@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun RecipeScreen(
+    recipeId: Int?,
     onBackClick: () -> Unit,
     onInstructionsClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -26,7 +27,7 @@ fun RecipeScreen(
             )
         }
         Text(
-            text = "Hello RecipeScreen!",
+            text = "Hello RecipeScreen with id : $recipeId !",
             modifier = modifier
         )
         Button(onClick = { onInstructionsClick() }) {
@@ -38,5 +39,9 @@ fun RecipeScreen(
 @Preview
 @Composable
 fun RecipeScreenPreview() {
-    RecipeScreen(onBackClick = { }, onInstructionsClick = { })
+    RecipeScreen(
+        onBackClick = { },
+        onInstructionsClick = { },
+        recipeId = 0
+    )
 }
