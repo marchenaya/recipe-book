@@ -1,4 +1,4 @@
-package com.marchenaya.recipe.navigation
+package com.marchenaya.recipebook.navigation.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -7,9 +7,13 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.marchenaya.recipe.InstructionsScreen
 import com.marchenaya.recipe.RecipeScreen
+import com.marchenaya.recipebook.navigation.destination.ARG_KEY_RECIPE_ID
+import com.marchenaya.recipebook.navigation.destination.Instructions
+import com.marchenaya.recipebook.navigation.destination.RECIPE_DESTINATION_ROUTE
+import com.marchenaya.recipebook.navigation.destination.Recipe
 
-fun NavGraphBuilder.recipeGraph(onBackClick: () -> Unit, onInstructionsClick: () -> Unit) {
-    navigation(Recipe.route, RECIPE_ROUTE) {
+fun NavGraphBuilder.recipeGraph(onInstructionsClick: () -> Unit) {
+    navigation(Recipe.route, RECIPE_DESTINATION_ROUTE) {
         composable(
             route = Recipe.route,
             arguments = listOf(
@@ -18,11 +22,10 @@ fun NavGraphBuilder.recipeGraph(onBackClick: () -> Unit, onInstructionsClick: ()
         ) { navBackStackEntry ->
             RecipeScreen(
                 recipeId = navBackStackEntry.arguments?.getInt(ARG_KEY_RECIPE_ID),
-                onBackClick = { onBackClick() },
                 onInstructionsClick = { onInstructionsClick() })
         }
         composable(Instructions.route) {
-            InstructionsScreen(onBackClick = { onBackClick() })
+            InstructionsScreen()
         }
     }
 }

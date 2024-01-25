@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,7 +16,6 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marchenaya.core.model.Recipe
 import com.marchenaya.core.ui.component.RecipeBookCardList
-import com.marchenaya.core.ui.component.RecipeBookText
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import kotlinx.coroutines.flow.flowOf
 
@@ -34,7 +32,6 @@ fun HomeScreen(
         viewModel.randomRecipesUiState.collectAsLazyPagingItems()
 
     HomeContentScreen(
-        title = title,
         randomRecipesPagingItems = randomRecipesPagingItems,
         onSearchClick = onSearchClick,
         onRecipeClick = onRecipeClick,
@@ -45,22 +42,17 @@ fun HomeScreen(
 
 @Composable
 fun HomeContentScreen(
-    @StringRes title: Int,
     randomRecipesPagingItems: LazyPagingItems<Recipe>,
     onSearchClick: () -> Unit,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column {
-        RecipeBookText(
-            text = stringResource(id = title),
-            style = MaterialTheme.typography.titleLarge,
-            modifier = modifier.padding(all = 16.dp)
-        )
 
         RecipeBookCardList(
             items = randomRecipesPagingItems,
-            onRecipeClick
+            onRecipeClick,
+            modifier.padding(top = 8.dp)
         )
 
         Button(onClick = { onSearchClick() }) {
@@ -75,7 +67,6 @@ fun HomeContentScreen(
 fun HomeContentScreenPreview() {
     RecipeBookTheme {
         HomeContentScreen(
-            R.string.home_title,
             flowOf(
                 PagingData.from(
                     MutableList(10) {

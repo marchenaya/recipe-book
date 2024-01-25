@@ -1,4 +1,4 @@
-package com.marchenaya.recipebook.navigation
+package com.marchenaya.recipebook.ui.bar.bottom
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -7,17 +7,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.compose.rememberNavController
+import com.marchenaya.recipebook.navigation.destination.Home
+import com.marchenaya.recipebook.navigation.destination.RecipeBookDestination
+import com.marchenaya.recipebook.navigation.destination.RecipeBookTopLevelDestination
+import com.marchenaya.recipebook.navigation.destination.Settings
+import com.marchenaya.recipebook.navigation.destination.Shopping
 
 @Composable
-fun RecipeBookNavigationBar(
-    destinations: List<RecipeBookDestination>,
-    currentDestination: NavDestination?,
-    onNavigateToDestination: (RecipeBookDestination) -> Unit
+fun RecipeBookBottomBar(
+    destinations: List<RecipeBookTopLevelDestination>,
+    currentDestination: RecipeBookDestination?,
+    onNavigateToDestination: (RecipeBookTopLevelDestination) -> Unit
 ) {
-    if (currentDestination?.route in destinations.map { it.route }) {
+    if (currentDestination?.route in destinations.map {
+            it.route
+        }) {
         NavigationBar {
             destinations.forEach { destination ->
                 NavigationBarItem(
@@ -28,7 +32,7 @@ fun RecipeBookNavigationBar(
                         )
                     },
                     label = { Text(stringResource(destination.title)) },
-                    selected = currentDestination?.hierarchy?.any { it.route == destination.route } == true,
+                    selected = currentDestination?.route == destination.route,
                     onClick = {
                         onNavigateToDestination(destination)
                     }
@@ -41,8 +45,8 @@ fun RecipeBookNavigationBar(
 @Preview
 @Composable
 fun RecipeBookNavigationBarPreview() {
-    RecipeBookNavigationBar(
+    RecipeBookBottomBar(
         listOf(Home, Shopping, Settings),
-        rememberNavController().currentDestination
+        Home
     ) {}
 }
