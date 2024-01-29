@@ -26,13 +26,14 @@ import kotlinx.coroutines.flow.flowOf
 @Composable
 fun RecipeBookCardList(
     items: LazyPagingItems<Recipe>,
-    onCardClick: (Int) -> Unit
+    onCardClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     when (items.loadState.refresh) {
         LoadState.Loading -> {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
+                modifier = modifier.fillMaxSize()
             ) {
                 CircularProgressIndicator()
             }
@@ -43,7 +44,7 @@ fun RecipeBookCardList(
                 text = stringResource(R.string.error),
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(all = 16.dp)
+                modifier = modifier.padding(all = 16.dp)
             )
         }
 
@@ -51,7 +52,8 @@ fun RecipeBookCardList(
             if (items.itemCount > 0) {
                 LazyRow(
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = modifier
                 ) {
                     items(items.itemCount) { index ->
                         val cardId = items[index]?.id ?: 0
@@ -69,7 +71,7 @@ fun RecipeBookCardList(
                     text = stringResource(R.string.empty_recipes),
                     color = MaterialTheme.colorScheme.secondary,
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(all = 16.dp)
+                    modifier = modifier.padding(all = 16.dp)
                 )
             }
         }
@@ -91,6 +93,8 @@ fun RecipeBookCardListPreview() {
                         )
                     }
                 )
-            ).collectAsLazyPagingItems()) {}
+            ).collectAsLazyPagingItems(),
+            {}
+        )
     }
 }
