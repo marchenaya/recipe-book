@@ -18,11 +18,9 @@ import com.marchenaya.shopping.ShoppingScreen
 
 @Composable
 fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier = Modifier) {
-    val onBackClick: () -> Unit = { navHostController.popBackStack() }
     NavHost(navController = navHostController, startDestination = Home.route, modifier = modifier) {
         composable(Home.route) {
             HomeScreen(
-                title = Home.title,
                 onSearchClick = { navHostController.navigate(SEARCH_DESTINATION_ROUTE) },
                 onRecipeClick = { recipeId ->
                     navHostController.navigate("$ROUTING_RECIPE_PREFIX$recipeId")

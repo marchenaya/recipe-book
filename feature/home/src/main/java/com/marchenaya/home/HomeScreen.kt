@@ -1,6 +1,5 @@
 package com.marchenaya.home
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -21,7 +20,6 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun HomeScreen(
-    @StringRes title: Int,
     onSearchClick: () -> Unit,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
