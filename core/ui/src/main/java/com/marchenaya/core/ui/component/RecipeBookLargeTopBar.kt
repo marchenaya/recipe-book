@@ -1,6 +1,9 @@
 package com.marchenaya.core.ui.component
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,10 +15,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.marchenaya.ui.R
+
+private const val ImageBaseHeight = 200
+private const val TopBarBaseHeight = 60
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,36 +36,42 @@ fun RecipeBookLargeTopBar(
     title: String,
     imageUrl: String
 ) {
-
-    LargeTopAppBar(
-        title = {
-            Column {
+    val imageHeight = (1 - scrollBehavior.state.collapsedFraction) * ImageBaseHeight
+    val topBarHeight = (1 - scrollBehavior.state.collapsedFraction) * TopBarBaseHeight
+    Box(modifier = Modifier.fillMaxWidth()) {
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = stringResource(R.string.recipe_image_description, title),
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(imageHeight.dp)
+        )
+        LargeTopAppBar(
+            title = {
                 Text(
-                    title
+                    text = title, fontWeight = FontWeight.ExtraBold
                 )
-                AsyncImage(
-                    model = imageUrl,
-                    contentDescription = ""
-                )
-            }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),
-        navigationIcon = {
-            IconButton(onClick = {
-                onNavigationClick()
-            }) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Localized description",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior
-    )
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Transparent,
+                titleContentColor = MaterialTheme.colorScheme.primary,
+            ),
+            navigationIcon = {
+                IconButton(onClick = {
+                    onNavigationClick()
+                }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Localized description",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            },
+            scrollBehavior = scrollBehavior,
+            windowInsets = WindowInsets(0.dp, 0.dp, 0.dp, topBarHeight.dp)
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,6 +81,7 @@ fun RecipeBookLargeTopBarPreview() {
     RecipeBookLargeTopBar(
         {},
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(),
-        "", stringResource(id = R.string.image_preview)
+        stringResource(id = R.string.text_preview),
+        stringResource(id = R.string.image_preview)
     )
 }
