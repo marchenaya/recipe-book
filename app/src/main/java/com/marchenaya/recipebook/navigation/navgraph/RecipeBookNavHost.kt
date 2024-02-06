@@ -9,8 +9,8 @@ import com.marchenaya.home.HomeScreen
 import com.marchenaya.recipebook.navigation.destination.Filter
 import com.marchenaya.recipebook.navigation.destination.Home
 import com.marchenaya.recipebook.navigation.destination.Instructions
-import com.marchenaya.recipebook.navigation.destination.ROUTING_RECIPE_PREFIX
-import com.marchenaya.recipebook.navigation.destination.SEARCH_DESTINATION_ROUTE
+import com.marchenaya.recipebook.navigation.destination.RoutingRecipePrefix
+import com.marchenaya.recipebook.navigation.destination.SearchDestinationRoute
 import com.marchenaya.recipebook.navigation.destination.Settings
 import com.marchenaya.recipebook.navigation.destination.Shopping
 import com.marchenaya.settings.SettingsScreen
@@ -21,9 +21,9 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
     NavHost(navController = navHostController, startDestination = Home.route, modifier = modifier) {
         composable(Home.route) {
             HomeScreen(
-                onSearchClick = { navHostController.navigate(SEARCH_DESTINATION_ROUTE) },
+                onSearchClick = { navHostController.navigate(SearchDestinationRoute) },
                 onRecipeClick = { recipeId ->
-                    navHostController.navigate("$ROUTING_RECIPE_PREFIX$recipeId")
+                    navHostController.navigate("$RoutingRecipePrefix$recipeId")
                 }
             )
         }
@@ -38,11 +38,14 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
                 navHostController.navigate(Filter.route)
             }
         ) { recipeId ->
-            navHostController.navigate("$ROUTING_RECIPE_PREFIX$recipeId")
+            navHostController.navigate("$RoutingRecipePrefix$recipeId")
         }
         recipeGraph(
             onInstructionsClick = {
                 navHostController.navigate(Instructions.route)
+            },
+            onBackClick = {
+                navHostController.popBackStack()
             }
         )
     }
