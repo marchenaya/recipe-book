@@ -71,7 +71,9 @@ fun HomeContentScreenPreview() {
                         Recipe(
                             1,
                             stringResource(id = com.marchenaya.ui.R.string.card_text_preview),
-                            stringResource(id = com.marchenaya.ui.R.string.image_preview)
+                            stringResource(id = com.marchenaya.ui.R.string.image_preview),
+                            160,
+                            2
                         )
                     }
                 )

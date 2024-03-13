@@ -35,7 +35,7 @@ class RecipesRepositoryImpl @Inject constructor(
 
     private suspend fun RecipeRemote.toRecipeDomain(): Recipe =
         withContext(defaultDispatcher) {
-            Recipe(id, title, imageUrl)
+            Recipe(id, title, imageUrl, cookingTime, servings)
         }
 
     companion object {
