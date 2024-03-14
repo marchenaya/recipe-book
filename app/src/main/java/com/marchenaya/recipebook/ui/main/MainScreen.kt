@@ -12,6 +12,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.marchenaya.core.ui.theme.RecipeBookTheme
+import com.marchenaya.recipebook.navigation.destination.Recipe
 import com.marchenaya.recipebook.navigation.destination.RecipeBookDestination
 import com.marchenaya.recipebook.navigation.destination.RecipeBookTopLevelDestination
 import com.marchenaya.recipebook.navigation.navgraph.RecipeBookNavHost
@@ -21,8 +22,8 @@ import com.marchenaya.recipebook.ui.bar.top.RecipeBookTopBar
 @Composable
 fun RecipeBookApp() {
     RecipeBookTheme {
-        val navController = rememberNavController()
-        val currentBackStackEntry by navController.currentBackStackEntryAsState()
+        val navHostController = rememberNavController()
+        val currentBackStackEntry by navHostController.currentBackStackEntryAsState()
         val currentDestination by remember {
             derivedStateOf {
                 currentBackStackEntry?.destination?.route?.let(RecipeBookDestination::getByRoute)
@@ -31,19 +32,22 @@ fun RecipeBookApp() {
 
         Scaffold(
             topBar = {
-                RecipeBookTopBar(
-                    currentDestination = currentDestination,
-                    onNavigationClick = {
-                        navController.popBackStack()
-                    })
+                if (currentDestination != Recipe) {
+                    RecipeBookTopBar(
+                        currentDestination = currentDestination,
+                        onNavigationClick = {
+                            navHostController.popBackStack()
+                        }
+                    )
+                }
             },
             bottomBar = {
                 RecipeBookBottomBar(
                     destinations = RecipeBookTopLevelDestination.bottomBarScreens,
                     currentDestination = currentDestination,
                     onNavigateToDestination = { destination ->
-                        navController.navigate(destination.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
+                        navHostController.navigate(destination.route) {
+                            popUpTo(navHostController.graph.findStartDestination().id) {
                                 saveState = true
                             }
                             launchSingleTop = true
@@ -54,7 +58,7 @@ fun RecipeBookApp() {
             }
         ) { innerPadding ->
             RecipeBookNavHost(
-                navHostController = navController,
+                navHostController = navHostController,
                 modifier = Modifier.padding(innerPadding)
             )
         }

@@ -5,4 +5,6 @@
     <string name="text_preview">Hello world !</string>
     <string name="image_preview">https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg</string>
     <string name="card_text_preview">Elephant</string>
+    <string name="recipe_image_description">Image of %1$s</string>
+    <string name="content_description_preview">Content description</string>
 </resources>

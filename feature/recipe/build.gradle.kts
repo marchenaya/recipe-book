@@ -42,6 +42,8 @@ android {
 dependencies {
 
     implementation(project(":core:ui"))
+    implementation(project(":core:model"))
+
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.material3)
@@ -49,6 +51,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material.iconsExtended)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

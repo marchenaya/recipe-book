@@ -22,7 +22,9 @@ class RecipesRemoteDataSourceImpl @Inject constructor(
                 RecipeRemote(
                     index,
                     "Elephant $index",
-                    "https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg"
+                    "https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg",
+                    160,
+                    2
                 )
             }
         }

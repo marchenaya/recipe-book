@@ -6,9 +6,9 @@ import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
-private const val HOME_ROUTE = "home"
-private const val SHOPPING_ROUTE = "shopping"
-private const val SETTINGS_ROUTE = "settings"
+private const val HomeRoute = "home"
+private const val ShoppingRoute = "shopping"
+private const val SettingsRoute = "settings"
 
 sealed class RecipeBookTopLevelDestination : RecipeBookDestination() {
 
@@ -28,7 +28,7 @@ data object Home : RecipeBookTopLevelDestination() {
     override val selectedIcon: ImageVector
         get() = Icons.Rounded.Home
     override val route: String
-        get() = HOME_ROUTE
+        get() = HomeRoute
 
 }
 
@@ -38,7 +38,7 @@ data object Shopping : RecipeBookTopLevelDestination() {
     override val selectedIcon: ImageVector
         get() = Icons.Rounded.Checklist
     override val route: String
-        get() = SHOPPING_ROUTE
+        get() = ShoppingRoute
 }
 
 data object Settings : RecipeBookTopLevelDestination() {
@@ -47,7 +47,7 @@ data object Settings : RecipeBookTopLevelDestination() {
     override val selectedIcon: ImageVector
         get() = Icons.Rounded.Settings
     override val route: String
-        get() = SETTINGS_ROUTE
+        get() = SettingsRoute
 }
 
 

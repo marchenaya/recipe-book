@@ -4,4 +4,9 @@
     <string name="instructions_title">Instructions</string>
     <string name="close">Close</string>
     <string name="back">Back</string>
+    <string name="preparation_time">Preparation time</string>
+    <string name="preparation_time_icon_description">Icon for preparation time</string>
+    <string name="servings_icon_description">Icon for number of servings</string>
+    <string name="cooking_time">Cooking time</string>
+    <string name="servings_template">For %1$d</string>
 </resources>

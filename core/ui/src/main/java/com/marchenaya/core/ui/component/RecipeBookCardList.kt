@@ -89,7 +89,9 @@ fun RecipeBookCardListPreview() {
                         Recipe(
                             1,
                             stringResource(id = R.string.card_text_preview),
-                            stringResource(id = R.string.image_preview)
+                            stringResource(id = R.string.image_preview),
+                            160,
+                            2
                         )
                     }
                 )

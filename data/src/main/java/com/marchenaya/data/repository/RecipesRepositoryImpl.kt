@@ -26,7 +26,7 @@ class RecipesRepositoryImpl @Inject constructor(
 
     override fun getRandomRecipes(): Flow<PagingData<Recipe>> {
         return Pager(
-            config = PagingConfig(NETWORK_PAGE_SIZE),
+            config = PagingConfig(NetworkPageSize),
             pagingSourceFactory = { randomRecipePagingSource }
         ).flow.map { pagingData ->
             pagingData.map { recipeRemote -> recipeRemote.toRecipeDomain() }
@@ -35,11 +35,11 @@ class RecipesRepositoryImpl @Inject constructor(
 
     private suspend fun RecipeRemote.toRecipeDomain(): Recipe =
         withContext(defaultDispatcher) {
-            Recipe(id, title, imageUrl)
+            Recipe(id, title, imageUrl, cookingTime, servings)
         }
 
     companion object {
-        const val NETWORK_PAGE_SIZE = 50
+        const val NetworkPageSize = 50
     }
 
 }

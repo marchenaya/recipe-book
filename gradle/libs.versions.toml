@@ -1,8 +1,8 @@
 [versions]
 #AGP
-android-gradle-plugin = "8.2.2"
+android-gradle-plugin = "8.3.0"
 #Google
-ui-text-google-fonts = "1.6.0"
+ui-text-google-fonts = "1.6.3"
 #Kotlin
 org-jetbrains-kotlin-android = "1.9.22"
 kotlinx-coroutines-core = "1.7.3"
@@ -10,21 +10,21 @@ org-jetbrains-kotlin-jvm = "1.9.21"
 #Hilt
 hilt-android = "2.50"
 hilt-android-compiler = "2.50"
-hilt-navigation-compose = "1.1.0"
+hilt-navigation-compose = "1.2.0"
 #AndroidX
 core-ktx = "1.12.0"
 lifecycle = "2.7.0"
 paging = "3.2.1"
 appcompat = "1.6.1"
 #Jetpack Compose
-compose-compiler = "1.5.8"
-compose-bom = "2024.01.00"
-compose-ui = "1.6.0"
-androidx-navigation-compose = "2.7.6"
+compose-compiler = "1.5.10"
+compose-bom = "2024.02.02"
+compose-ui = "1.6.3"
+androidx-navigation-compose = "2.7.7"
 activity-compose = "1.8.2"
 constraint-layout-compose = "1.0.1"
 #Material
-material3 = "1.2.0-rc01"
+material3 = "1.2.1"
 #OkHttp
 logging-interceptor = "4.12.0"
 #Retrofit
