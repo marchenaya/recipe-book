@@ -1,6 +1,6 @@
 [versions]
 #AGP
-android-gradle-plugin = "8.2.2"
+android-gradle-plugin = "8.3.0"
 #Google
 ui-text-google-fonts = "1.6.3"
 #Kotlin
