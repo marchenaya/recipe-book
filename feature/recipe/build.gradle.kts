@@ -2,11 +2,12 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.marchenaya.recipe"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -41,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
 
@@ -52,6 +54,10 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.compose)
+    implementation(libs.androidx.lifecycle)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

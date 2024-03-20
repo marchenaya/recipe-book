@@ -1,9 +1,13 @@
 package com.marchenaya.core.ui.component
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,8 +16,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import com.marchenaya.ui.R
 import com.marchenaya.core.ui.theme.RecipeBookTheme
+import com.marchenaya.ui.R
 
 @Composable
 fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
@@ -26,12 +30,17 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
         ) {
             AsyncImage(
                 model = cardImage,
-                contentDescription = cardText
+                contentDescription = cardText,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
             )
         }
         RecipeBookText(
             text = cardText,
-            modifier = Modifier.layoutId("text")
+            modifier = Modifier
+                .layoutId("text")
+                .padding(top = 8.dp),
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }

@@ -3,6 +3,9 @@ package com.marchenaya.data.remote.datasource
 import com.marchenaya.data.Dispatcher
 import com.marchenaya.data.Dispatchers
 import com.marchenaya.data.remote.api.RecipesApi
+import com.marchenaya.data.remote.model.IngredientMeasureRemote
+import com.marchenaya.data.remote.model.IngredientMetricMeasureRemote
+import com.marchenaya.data.remote.model.IngredientRemote
 import com.marchenaya.data.remote.model.RecipeRemote
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -18,15 +21,26 @@ class RecipesRemoteDataSourceImpl @Inject constructor(
             //todo : uncomment
             //api.getRandomRecipes().body()?.recipes ?: emptyList()
             //todo : remove
-            MutableList(15) { index ->
+            MutableList(10) { index ->
                 RecipeRemote(
                     index,
                     "Elephant $index",
-                    "https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg",
-                    160,
-                    2
+                    "https://spoonacular.com/recipeImages/716430-556x370.jpg", 160,
+                    2,
+                    listOf(
+                        IngredientRemote(
+                            1, "Cheese", IngredientMeasureRemote(
+                                IngredientMetricMeasureRemote(100.0, "g")
+                            )
+                        )
+                    )
                 )
             }
+        }
+
+    override suspend fun getRecipeById(id: Int): RecipeRemote? =
+        withContext(ioDispatcher) {
+            api.getRecipeById(id).body()
         }
 
 }

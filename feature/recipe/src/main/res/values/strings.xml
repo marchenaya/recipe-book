@@ -9,4 +9,5 @@
     <string name="servings_icon_description">Icon for number of servings</string>
     <string name="cooking_time">Cooking time</string>
     <string name="servings_template">For %1$d</string>
+    <string name="ingredients">Ingredients</string>
 </resources>

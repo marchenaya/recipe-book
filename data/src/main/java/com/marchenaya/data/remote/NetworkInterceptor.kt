@@ -18,7 +18,7 @@ class NetworkInterceptor @Inject constructor() : Interceptor {
         val originalRequest = chain.request()
         try {
             val modifiedUrl = originalRequest.url.newBuilder()
-                .addQueryParameter("apiKey", ApiConstants.ApiKey)
+                .addQueryParameter("apiKey", ApiConstants.API_KEY)
                 .build()
             val modifiedRequest = originalRequest.newBuilder().url(modifiedUrl).build()
             val response = chain.proceed(modifiedRequest)

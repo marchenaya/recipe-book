@@ -5,7 +5,8 @@ data class Recipe(
     val title: String,
     val imageUrl: String?,
     val cookingTime: Int,
-    val servings: Int
+    val servings: Int,
+    val ingredients: List<Ingredient>
 ) {
 
     fun cookingTimeToHoursAndMinutes(): String {

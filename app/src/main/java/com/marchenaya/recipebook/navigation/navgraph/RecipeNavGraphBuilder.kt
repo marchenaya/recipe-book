@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.marchenaya.recipe.InstructionsScreen
-import com.marchenaya.recipe.RecipeScreen
+import com.marchenaya.recipe.recipe.RecipeScreen
 import com.marchenaya.recipebook.navigation.destination.ArgKeyRecipeId
 import com.marchenaya.recipebook.navigation.destination.Instructions
 import com.marchenaya.recipebook.navigation.destination.Recipe

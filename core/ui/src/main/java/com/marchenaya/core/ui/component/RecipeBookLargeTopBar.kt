@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -69,7 +70,8 @@ fun RecipeBookLargeTopBar(
                 }
             },
             scrollBehavior = scrollBehavior,
-            windowInsets = WindowInsets(0.dp, 0.dp, 0.dp, topBarHeight.dp)
+            windowInsets = WindowInsets(0.dp, 0.dp, 0.dp, topBarHeight.dp),
+            modifier = Modifier.padding(bottom = 8.dp)
         )
     }
 }

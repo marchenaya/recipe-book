@@ -8,4 +8,6 @@ interface RecipesRepository {
 
     fun getRandomRecipes(): Flow<PagingData<Recipe>>
 
+    suspend fun getRecipeById(id: Int): Recipe?
+
 }
