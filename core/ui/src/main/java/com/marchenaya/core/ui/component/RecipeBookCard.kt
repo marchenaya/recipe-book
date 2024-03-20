@@ -1,6 +1,7 @@
 package com.marchenaya.core.ui.component
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,8 +13,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import com.marchenaya.ui.R
 import com.marchenaya.core.ui.theme.RecipeBookTheme
+import com.marchenaya.ui.R
 
 @Composable
 fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
@@ -31,7 +32,9 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
         }
         RecipeBookText(
             text = cardText,
-            modifier = Modifier.layoutId("text")
+            modifier = Modifier
+                .layoutId("text")
+                .padding(top = 8.dp)
         )
     }
 }

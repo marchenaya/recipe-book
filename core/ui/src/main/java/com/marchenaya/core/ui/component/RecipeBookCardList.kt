@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,6 +18,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.marchenaya.core.model.Ingredient
 import com.marchenaya.core.model.Recipe
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.ui.R
@@ -50,9 +51,9 @@ fun RecipeBookCardList(
 
         is LoadState.NotLoading -> {
             if (items.itemCount > 0) {
-                LazyRow(
+                LazyColumn(
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier
                 ) {
                     items(items.itemCount) { index ->
@@ -91,7 +92,12 @@ fun RecipeBookCardListPreview() {
                             stringResource(id = R.string.card_text_preview),
                             stringResource(id = R.string.image_preview),
                             160,
-                            2
+                            2,
+                            listOf(
+                                Ingredient(
+                                    1, "Cheese", "100.0 g"
+                                )
+                            )
                         )
                     }
                 )

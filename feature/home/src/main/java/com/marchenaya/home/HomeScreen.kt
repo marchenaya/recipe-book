@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.marchenaya.core.model.Ingredient
 import com.marchenaya.core.model.Recipe
 import com.marchenaya.core.ui.component.RecipeBookCardList
 import com.marchenaya.core.ui.theme.RecipeBookTheme
@@ -47,15 +48,18 @@ fun HomeContentScreen(
 ) {
     Column {
 
+        Button(
+            onClick = { onSearchClick() },
+            modifier = Modifier.padding(top = 8.dp, start = 8.dp)
+        ) {
+            Text(text = "Navigate to Search")
+        }
+
         RecipeBookCardList(
             items = randomRecipesPagingItems,
             onRecipeClick,
             modifier.padding(top = 8.dp)
         )
-
-        Button(onClick = { onSearchClick() }) {
-            Text(text = "Navigate to Search")
-        }
 
     }
 }
@@ -73,7 +77,12 @@ fun HomeContentScreenPreview() {
                             stringResource(id = com.marchenaya.ui.R.string.card_text_preview),
                             stringResource(id = com.marchenaya.ui.R.string.image_preview),
                             160,
-                            2
+                            2,
+                            listOf(
+                                Ingredient(
+                                    1, "Cheese", "100.0 g"
+                                )
+                            )
                         )
                     }
                 )

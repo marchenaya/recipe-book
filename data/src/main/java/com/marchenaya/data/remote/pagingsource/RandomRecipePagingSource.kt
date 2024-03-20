@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marchenaya.data.remote.datasource.RecipesRemoteDataSource
 import com.marchenaya.data.remote.model.RecipeRemote
-import com.marchenaya.data.repository.RecipesRepositoryImpl.Companion.NetworkPageSize
+import com.marchenaya.data.repository.RecipesRepositoryImpl.Companion.NETWORK_PAGE_SIZE
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -26,7 +26,7 @@ class RandomRecipePagingSource @Inject constructor(
             val nextKey = if (response.isEmpty()) {
                 null
             } else {
-                position + (params.loadSize / NetworkPageSize)
+                position + (params.loadSize / NETWORK_PAGE_SIZE)
             }
             LoadResult.Page(
                 data = remoteDataSource.getRandomRecipes(),

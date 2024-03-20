@@ -6,4 +6,6 @@ interface RecipesRemoteDataSource {
 
     suspend fun getRandomRecipes(): List<RecipeRemote>
 
+    suspend fun getRecipeById(id: Int): RecipeRemote?
+
 }

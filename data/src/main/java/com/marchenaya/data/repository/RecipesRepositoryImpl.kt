@@ -5,9 +5,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.marchenaya.core.model.Ingredient
 import com.marchenaya.core.model.Recipe
 import com.marchenaya.data.Dispatcher
 import com.marchenaya.data.Dispatchers
+import com.marchenaya.data.remote.datasource.RecipesRemoteDataSource
+import com.marchenaya.data.remote.model.IngredientRemote
 import com.marchenaya.data.remote.model.RecipeRemote
 import com.marchenaya.data.remote.pagingsource.RandomRecipePagingSource
 import com.marchenaya.domain.repository.RecipesRepository
@@ -21,25 +24,47 @@ import javax.inject.Inject
 class RecipesRepositoryImpl @Inject constructor(
     @Dispatcher(Dispatchers.Default) private val defaultDispatcher: CoroutineDispatcher,
     @Dispatcher(Dispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
-    private val randomRecipePagingSource: RandomRecipePagingSource
+    private val randomRecipePagingSource: RandomRecipePagingSource,
+    private val remoteDataSource: RecipesRemoteDataSource
 ) : RecipesRepository {
 
     override fun getRandomRecipes(): Flow<PagingData<Recipe>> {
         return Pager(
-            config = PagingConfig(NetworkPageSize),
+            config = PagingConfig(NETWORK_PAGE_SIZE),
             pagingSourceFactory = { randomRecipePagingSource }
         ).flow.map { pagingData ->
             pagingData.map { recipeRemote -> recipeRemote.toRecipeDomain() }
         }.cachedIn(CoroutineScope(ioDispatcher))
     }
 
+    override suspend fun getRecipeById(id: Int): Recipe? {
+        return remoteDataSource.getRecipeById(id)?.toRecipeDomain()
+    }
+
     private suspend fun RecipeRemote.toRecipeDomain(): Recipe =
         withContext(defaultDispatcher) {
-            Recipe(id, title, imageUrl, cookingTime, servings)
+            Recipe(
+                id,
+                title,
+                imageUrl,
+                cookingTime,
+                servings,
+                ingredients.map { ingredientRemote -> ingredientRemote.toIngredientDomain() })
+        }
+
+    private suspend fun IngredientRemote.toIngredientDomain(): Ingredient =
+        withContext(defaultDispatcher) {
+            Ingredient(
+                id,
+                name,
+                "${
+                    measures.metricMeasure.amount.toString().replace(".0", "")
+                } ${measures.metricMeasure.unit}".trim()
+            )
         }
 
     companion object {
-        const val NetworkPageSize = 50
+        const val NETWORK_PAGE_SIZE = 50
     }
 
 }

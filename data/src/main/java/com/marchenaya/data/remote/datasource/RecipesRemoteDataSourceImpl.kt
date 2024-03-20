@@ -15,18 +15,12 @@ class RecipesRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getRandomRecipes(): List<RecipeRemote> =
         withContext(ioDispatcher) {
-            //todo : uncomment
-            //api.getRandomRecipes().body()?.recipes ?: emptyList()
-            //todo : remove
-            MutableList(15) { index ->
-                RecipeRemote(
-                    index,
-                    "Elephant $index",
-                    "https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg",
-                    160,
-                    2
-                )
-            }
+            api.getRandomRecipes().body()?.recipes ?: emptyList()
+        }
+
+    override suspend fun getRecipeById(id: Int): RecipeRemote? =
+        withContext(ioDispatcher) {
+            api.getRecipeById(id).body()
         }
 
 }

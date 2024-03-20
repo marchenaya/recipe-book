@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import com.marchenaya.data.BuildConfig
 import com.marchenaya.data.exception.WrongBaseUrlException
 import com.marchenaya.data.remote.NetworkInterceptor
-import com.marchenaya.data.remote.api.ApiConstants.BaseUrl
+import com.marchenaya.data.remote.api.ApiConstants.BASE_URL
 import com.marchenaya.data.remote.api.RecipesApi
 import dagger.Module
 import dagger.Provides
@@ -50,7 +50,7 @@ object NetworkingModule {
         okHttpClient: OkHttpClient,
         gson: Gson
     ): Retrofit {
-        val baseUrl = BaseUrl.toHttpUrlOrNull() ?: throw WrongBaseUrlException()
+        val baseUrl = BASE_URL.toHttpUrlOrNull() ?: throw WrongBaseUrlException()
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)

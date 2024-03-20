@@ -8,4 +8,5 @@ data class RecipeRemote(
     @SerializedName("image") val imageUrl: String?,
     @SerializedName("readyInMinutes") val cookingTime: Int,
     @SerializedName("servings") val servings: Int,
+    @SerializedName("extendedIngredients") val ingredients: List<IngredientRemote>
 )
