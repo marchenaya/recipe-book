@@ -1,4 +1,4 @@
-package com.marchenaya.data.remote.model
+package com.marchenaya.data.remote.model.ingredient
 
 import com.google.gson.annotations.SerializedName
 

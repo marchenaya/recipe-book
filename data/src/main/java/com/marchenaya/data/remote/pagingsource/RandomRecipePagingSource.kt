@@ -3,7 +3,7 @@ package com.marchenaya.data.remote.pagingsource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marchenaya.data.remote.datasource.RecipesRemoteDataSource
-import com.marchenaya.data.remote.model.RecipeRemote
+import com.marchenaya.data.remote.model.recipe.RecipeRemote
 import com.marchenaya.data.repository.RecipesRepositoryImpl.Companion.NETWORK_PAGE_SIZE
 import retrofit2.HttpException
 import java.io.IOException

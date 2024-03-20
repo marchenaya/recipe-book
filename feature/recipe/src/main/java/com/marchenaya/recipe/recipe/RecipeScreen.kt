@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -100,28 +101,6 @@ fun RecipeScreenContent(
         is RecipeUiState.Loading -> LoadingContent()
         is RecipeUiState.Error -> ErrorContent(uiState.exception)
     }
-
-
-}
-
-@Composable
-fun ScaffoldContent(
-    uiState: RecipeUiState,
-    onInstructionsClick: () -> Unit,
-    innerPadding: PaddingValues,
-    modifier: Modifier = Modifier
-) {
-    when (uiState) {
-        is RecipeUiState.Success -> SuccessContent(
-            modifier,
-            innerPadding,
-            uiState.recipe,
-            onInstructionsClick
-        )
-
-        RecipeUiState.Loading -> LoadingContent()
-        is RecipeUiState.Error -> ErrorContent(uiState.exception)
-    }
 }
 
 @Composable
@@ -169,11 +148,47 @@ private fun SuccessContent(
             )
         }
         item {
-            Text(
-                text = "Hello RecipeScreen with id : ${recipe.id} !",
-                modifier = Modifier.padding(start = 8.dp)
+            HorizontalDivider(Modifier.padding(top = 16.dp))
+            RecipeBookText(
+                text = stringResource(com.marchenaya.recipe.R.string.instructions),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp, top = 16.dp)
             )
-            Button(onClick = { onInstructionsClick() }, Modifier.padding(start = 8.dp)) {
+        }
+        items(recipe.instructions.keys.toList()) { instructionsName ->
+            if (instructionsName != "") {
+                HorizontalDivider(
+                    Modifier
+                        .padding(top = 8.dp)
+                        .padding(8.dp))
+                RecipeBookText(
+                    text = "Instructions for $instructionsName",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .padding(top = 8.dp)
+                )
+            }
+            recipe.instructions[instructionsName]?.forEach { instruction ->
+                RecipeBookText(
+                    text = "Step n°${instruction.id}",
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .padding(top = 8.dp)
+                )
+                Text(
+                    text = instruction.instruction,
+                    textAlign = TextAlign.Justify,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
+        }
+        item {
+            Button(
+                onClick = { onInstructionsClick() },
+                Modifier.padding(start = 8.dp, top = 8.dp)
+            ) {
                 Text(text = "Navigate to Instructions Screen")
             }
         }
