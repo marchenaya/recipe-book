@@ -6,12 +6,15 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.marchenaya.core.model.Ingredient
+import com.marchenaya.core.model.Instruction
 import com.marchenaya.core.model.Recipe
 import com.marchenaya.data.Dispatcher
 import com.marchenaya.data.Dispatchers
 import com.marchenaya.data.remote.datasource.RecipesRemoteDataSource
-import com.marchenaya.data.remote.model.IngredientRemote
-import com.marchenaya.data.remote.model.RecipeRemote
+import com.marchenaya.data.remote.model.ingredient.IngredientRemote
+import com.marchenaya.data.remote.model.instruction.InstructionRemote
+import com.marchenaya.data.remote.model.instruction.InstructionStepRemote
+import com.marchenaya.data.remote.model.recipe.RecipeRemote
 import com.marchenaya.data.remote.pagingsource.RandomRecipePagingSource
 import com.marchenaya.domain.repository.RecipesRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -49,7 +52,9 @@ class RecipesRepositoryImpl @Inject constructor(
                 imageUrl,
                 cookingTime,
                 servings,
-                ingredients.map { ingredientRemote -> ingredientRemote.toIngredientDomain() })
+                ingredients.map { ingredientRemote -> ingredientRemote.toIngredientDomain() },
+                instructions.toInstructionDomainMap()
+            )
         }
 
     private suspend fun IngredientRemote.toIngredientDomain(): Ingredient =
@@ -62,6 +67,20 @@ class RecipesRepositoryImpl @Inject constructor(
                 } ${measures.metricMeasure.unit}".trim()
             )
         }
+
+    private suspend fun List<InstructionRemote>.toInstructionDomainMap(): Map<String, List<Instruction>> =
+        withContext(defaultDispatcher) {
+            associate { instructionRemote ->
+                instructionRemote.name to instructionRemote.steps.map { instructionStepRemote ->
+                    instructionStepRemote.toInstructionDomain()
+                }
+            }
+        }
+
+    private fun InstructionStepRemote.toInstructionDomain() =
+        Instruction(
+            id, instruction
+        )
 
     companion object {
         const val NETWORK_PAGE_SIZE = 10

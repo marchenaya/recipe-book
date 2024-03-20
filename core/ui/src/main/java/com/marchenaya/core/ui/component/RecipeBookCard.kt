@@ -40,7 +40,7 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
             modifier = Modifier
                 .layoutId("text")
                 .padding(top = 8.dp),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleMedium
         )
     }
 }

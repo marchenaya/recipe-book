@@ -14,6 +14,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marchenaya.core.model.Ingredient
+import com.marchenaya.core.model.Instruction
 import com.marchenaya.core.model.Recipe
 import com.marchenaya.core.ui.component.RecipeBookCardList
 import com.marchenaya.core.ui.theme.RecipeBookTheme
@@ -82,7 +83,8 @@ fun HomeContentScreenPreview() {
                                 Ingredient(
                                     1, "Cheese", "100.0 g"
                                 )
-                            )
+                            ),
+                            mapOf("" to listOf(Instruction(1, "Cook")))
                         )
                     }
                 )
