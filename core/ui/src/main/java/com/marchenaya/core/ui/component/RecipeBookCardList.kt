@@ -52,7 +52,7 @@ fun RecipeBookCardList(
         is LoadState.NotLoading -> {
             if (items.itemCount > 0) {
                 LazyColumn(
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
+                    contentPadding = PaddingValues(start = 8.dp, end = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = modifier
                 ) {

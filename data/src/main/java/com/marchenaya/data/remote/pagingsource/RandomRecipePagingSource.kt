@@ -20,7 +20,7 @@ class RandomRecipePagingSource @Inject constructor(
         }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RecipeRemote> {
-        val position = params.key ?: StartingPageIndex
+        val position = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = remoteDataSource.getRandomRecipes()
             val nextKey = if (response.isEmpty()) {
@@ -30,7 +30,7 @@ class RandomRecipePagingSource @Inject constructor(
             }
             LoadResult.Page(
                 data = remoteDataSource.getRandomRecipes(),
-                prevKey = if (position == StartingPageIndex) null else position - 1,
+                prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
                 nextKey = nextKey
             )
         } catch (exception: IOException) {
@@ -41,7 +41,7 @@ class RandomRecipePagingSource @Inject constructor(
     }
 
     companion object {
-        const val StartingPageIndex = 1
+        const val STARTING_PAGE_INDEX = 1
     }
 
 }
