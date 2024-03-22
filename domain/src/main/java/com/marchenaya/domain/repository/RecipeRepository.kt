@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import com.marchenaya.core.model.Recipe
 import kotlinx.coroutines.flow.Flow
 
-interface RecipesRepository {
+interface RecipeRepository {
 
     fun getRandomRecipes(): Flow<PagingData<Recipe>>
 

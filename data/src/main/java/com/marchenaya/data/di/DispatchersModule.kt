@@ -1,8 +1,8 @@
 package com.marchenaya.data.di
 
-import com.marchenaya.data.Dispatcher
-import com.marchenaya.data.Dispatchers.Default
-import com.marchenaya.data.Dispatchers.IO
+import com.marchenaya.data.dispatcher.Dispatcher
+import com.marchenaya.data.dispatcher.Dispatchers.Default
+import com.marchenaya.data.dispatcher.Dispatchers.IO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

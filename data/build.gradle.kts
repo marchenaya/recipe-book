@@ -15,6 +15,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -31,7 +35,7 @@ android {
         buildConfigField(
             "String",
             "API_KEY",
-            "\"f79a23ba9c8c4adbbc076edba50ea714\""
+            "\"bbb11af2c38e44329b240030ceaa9df5\""
         )//TODO : Don't keep this key here
     }
     compileOptions {
@@ -59,6 +63,8 @@ dependencies {
     api(libs.converter.gson)
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.logging.interceptor)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

@@ -160,7 +160,8 @@ private fun SuccessContent(
                 HorizontalDivider(
                     Modifier
                         .padding(top = 8.dp)
-                        .padding(8.dp))
+                        .padding(8.dp)
+                )
                 RecipeBookText(
                     text = "Instructions for $instructionsName",
                     style = MaterialTheme.typography.titleMedium,
