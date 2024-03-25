@@ -5,8 +5,8 @@ abstract class EntityMapper<K : Any, T : Any> {
         return input.mapNotNull {
             try {
                 transformModelToEntity(it)
-            } catch (e: Exception) {
-                onMappingError(e)
+            } catch (exception: Exception) {
+                onMappingError(exception)
                 null
             }
         }
@@ -16,8 +16,8 @@ abstract class EntityMapper<K : Any, T : Any> {
         return input.mapNotNull {
             try {
                 transformEntityToModel(it)
-            } catch (e: Exception) {
-                onMappingError(e)
+            } catch (exception: Exception) {
+                onMappingError(exception)
                 null
             }
         }
@@ -25,5 +25,5 @@ abstract class EntityMapper<K : Any, T : Any> {
 
     abstract suspend fun transformEntityToModel(input: K): T
     abstract suspend fun transformModelToEntity(input: T): K
-    abstract fun onMappingError(error: Exception)
+    abstract fun onMappingError(exception: Exception)
 }

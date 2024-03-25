@@ -30,7 +30,7 @@ class InstructionEntityDataMapper @Inject constructor(
             )
         }
 
-    override fun onMappingError(error: Exception) {
-        traceComponent.traceError(TraceId.ENTITY_MAPPER_INSTRUCTION, "error", error)
+    override fun onMappingError(exception: Exception) {
+        traceComponent.traceError(TraceId.ENTITY_MAPPER_INSTRUCTION, "error", exception)
     }
 }

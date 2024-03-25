@@ -6,8 +6,8 @@ abstract class RemoteMapper<K : Any?, T : Any?> {
         return input.mapNotNull {
             try {
                 transformModelToRemote(it)
-            } catch (e: Exception) {
-                onMappingError(e)
+            } catch (exception: Exception) {
+                onMappingError(exception)
                 null
             }
         }
@@ -17,8 +17,8 @@ abstract class RemoteMapper<K : Any?, T : Any?> {
         return input.mapNotNull {
             try {
                 transformRemoteToModel(it)
-            } catch (e: Exception) {
-                onMappingError(e)
+            } catch (exception: Exception) {
+                onMappingError(exception)
                 null
             }
         }

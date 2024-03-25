@@ -12,7 +12,7 @@ import com.marchenaya.data.database.relation.RecipeWithIngredientsAndInstruction
 interface RecipeDao {
 
     @Transaction
-    @Query("SELECT * FROM recipe")
+    @Query("SELECT * FROM recipe ORDER BY recipe.name")
     fun getAllRecipes(): List<RecipeWithIngredientsAndInstructions>
 
     @Transaction

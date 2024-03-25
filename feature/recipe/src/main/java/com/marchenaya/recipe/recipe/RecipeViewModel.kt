@@ -24,8 +24,8 @@ class RecipeViewModel @Inject constructor(private val useCase: GetRecipeByIdUseC
                 } else {
                     _uiState.emit(RecipeUiState.Error(IllegalStateException("Recipe is null")))
                 }
-            } catch (e: Exception) {
-                _uiState.emit(RecipeUiState.Error(e))
+            } catch (exception: Exception) {
+                _uiState.emit(RecipeUiState.Error(exception))
             }
         }
     }

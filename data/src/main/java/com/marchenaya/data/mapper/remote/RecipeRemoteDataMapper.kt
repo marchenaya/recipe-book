@@ -43,7 +43,7 @@ class RecipeRemoteDataMapper @Inject constructor(
                 input.cookingTime,
                 input.servings,
                 ingredientRemoteDataMapper.transformRemoteList(input.ingredients),
-                input.instructions.toInstructionModelMap()
+                (input.instructions ?: emptyList()).toInstructionModelMap()
             )
         }
 

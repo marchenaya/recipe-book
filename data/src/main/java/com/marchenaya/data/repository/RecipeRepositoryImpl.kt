@@ -42,9 +42,18 @@ class RecipeRepositoryImpl @Inject constructor(
         return if (networkManager.isNetworkAvailable()) {
             try {
                 val recipe = remoteDataSource.getRecipeById(id)
-                return recipe?.let { recipeRemote ->
-                    recipeRemoteDataMapper.transformRemoteToModel(recipeRemote)
-                } ?: getLocalRecipeById(id)
+                if (recipe != null) {
+                    val recipeModel = recipeRemoteDataMapper.transformRemoteToModel(recipe)
+                    val recipeEntity = recipeEntityDataMapper.transformModelToEntity(recipeModel)
+                    localDataSource.saveRecipe(
+                        recipeEntity.recipeEntity,
+                        recipeEntity.ingredientEntityList,
+                        recipeEntity.instructionEntityList
+                    )
+                    return recipeModel
+                } else {
+                    getLocalRecipeById(id)
+                }
             } catch (exception: OverQuotaException) {
                 getLocalRecipeById(id)
             } catch (exception: ServerException) {

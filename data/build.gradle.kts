@@ -35,7 +35,7 @@ android {
         buildConfigField(
             "String",
             "API_KEY",
-            "\"bbb11af2c38e44329b240030ceaa9df5\""
+            "\"f79a23ba9c8c4adbbc076edba50ea714\""
         )//TODO : Don't keep this key here
     }
     compileOptions {

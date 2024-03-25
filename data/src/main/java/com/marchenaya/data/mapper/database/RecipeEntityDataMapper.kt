@@ -48,8 +48,8 @@ class RecipeEntityDataMapper @Inject constructor(
             )
         }
 
-    override fun onMappingError(error: Exception) {
-        traceComponent.traceError(TraceId.ENTITY_MAPPER_RECIPE, "error", error)
+    override fun onMappingError(exception: Exception) {
+        traceComponent.traceError(TraceId.ENTITY_MAPPER_RECIPE, "error", exception)
     }
 
     private suspend fun List<InstructionEntity>.toInstructionModelMap(): Map<String, List<Instruction>> =

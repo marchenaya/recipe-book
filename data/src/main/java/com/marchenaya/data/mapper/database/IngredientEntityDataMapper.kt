@@ -30,7 +30,7 @@ class IngredientEntityDataMapper @Inject constructor(
             )
         }
 
-    override fun onMappingError(error: Exception) {
-        traceComponent.traceError(TraceId.ENTITY_MAPPER_INGREDIENT, "error", error)
+    override fun onMappingError(exception: Exception) {
+        traceComponent.traceError(TraceId.ENTITY_MAPPER_INGREDIENT, "error", exception)
     }
 }

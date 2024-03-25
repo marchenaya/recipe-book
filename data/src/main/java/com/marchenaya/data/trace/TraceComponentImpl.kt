@@ -6,7 +6,7 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
-private const val LOG_FORMAT_LOCAL = "%s; %s; %s; %s"
+private const val LOG_FORMAT_LOCAL = "%s; %s; %s"
 private const val LOG_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
 private const val LOG_ARRAY_PREFIX = "["

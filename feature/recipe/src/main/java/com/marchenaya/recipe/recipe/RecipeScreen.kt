@@ -110,6 +110,7 @@ private fun SuccessContent(
     recipe: Recipe,
     onInstructionsClick: () -> Unit
 ) {
+    val instructions = recipe.instructions
     LazyColumn(modifier = modifier, contentPadding = innerPadding) {
         item {
             Row(
@@ -147,42 +148,49 @@ private fun SuccessContent(
                 Modifier.padding(horizontal = 8.dp)
             )
         }
-        item {
-            HorizontalDivider(Modifier.padding(top = 16.dp))
-            RecipeBookText(
-                text = stringResource(com.marchenaya.recipe.R.string.instructions),
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp, top = 16.dp)
-            )
-        }
-        items(recipe.instructions.keys.toList()) { instructionsName ->
-            if (instructionsName != "") {
-                HorizontalDivider(
-                    Modifier
-                        .padding(top = 8.dp)
-                        .padding(8.dp)
-                )
+        if (instructions.isNotEmpty()) {
+            item {
+                HorizontalDivider(Modifier.padding(top = 16.dp))
                 RecipeBookText(
-                    text = "Instructions for $instructionsName",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .padding(top = 8.dp)
+                    text = stringResource(com.marchenaya.recipe.R.string.instructions),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(
+                        bottom = 8.dp,
+                        start = 8.dp,
+                        end = 8.dp,
+                        top = 16.dp
+                    )
                 )
             }
-            recipe.instructions[instructionsName]?.forEach { instruction ->
-                RecipeBookText(
-                    text = "Step n°${instruction.id}",
-                    style = MaterialTheme.typography.titleSmall,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .padding(top = 8.dp)
-                )
-                Text(
-                    text = instruction.instruction,
-                    textAlign = TextAlign.Justify,
-                    modifier = Modifier.padding(horizontal = 8.dp)
-                )
+            items(instructions.keys.toList()) { instructionsName ->
+                if (instructionsName != "") {
+                    HorizontalDivider(
+                        Modifier
+                            .padding(top = 8.dp)
+                            .padding(8.dp)
+                    )
+                    RecipeBookText(
+                        text = "Instructions for $instructionsName",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .padding(top = 8.dp)
+                    )
+                }
+                instructions[instructionsName]?.forEach { instruction ->
+                    RecipeBookText(
+                        text = "Step n°${instruction.id}",
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .padding(top = 8.dp)
+                    )
+                    Text(
+                        text = instruction.instruction,
+                        textAlign = TextAlign.Justify,
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                }
             }
         }
         item {
