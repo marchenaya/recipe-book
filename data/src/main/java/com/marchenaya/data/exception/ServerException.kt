@@ -1,3 +1,5 @@
 package com.marchenaya.data.exception
 
-class ServerException : Exception()
+import java.io.IOException
+
+class ServerException : IOException()

@@ -4,9 +4,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.marchenaya.data.BuildConfig
 import com.marchenaya.data.exception.WrongBaseUrlException
-import com.marchenaya.data.remote.NetworkInterceptor
 import com.marchenaya.data.remote.api.ApiConstants.BASE_URL
 import com.marchenaya.data.remote.api.RecipesApi
+import com.marchenaya.data.remote.network.NetworkInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

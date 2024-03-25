@@ -11,5 +11,5 @@ data class RecipeRemote(
     @SerializedName("readyInMinutes") val cookingTime: Int,
     @SerializedName("servings") val servings: Int,
     @SerializedName("extendedIngredients") val ingredients: List<IngredientRemote>,
-    @SerializedName("analyzedInstructions") val instructions: List<InstructionRemote>
+    @SerializedName("analyzedInstructions") val instructions: List<InstructionRemote>?
 )
