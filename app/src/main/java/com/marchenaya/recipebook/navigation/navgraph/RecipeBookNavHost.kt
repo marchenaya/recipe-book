@@ -28,12 +28,6 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
     NavHost(
         navController = navHostController,
         startDestination = Home.route,
-        enterTransition = {
-            fadeIn()
-        },
-        exitTransition = {
-            fadeOut()
-        },
         modifier = modifier
     ) {
         composable(Home.route) {
