@@ -1,5 +1,12 @@
 package com.marchenaya.recipebook.navigation.navgraph
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -18,7 +25,17 @@ import com.marchenaya.shopping.ShoppingScreen
 
 @Composable
 fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navHostController, startDestination = Home.route, modifier = modifier) {
+    NavHost(
+        navController = navHostController,
+        startDestination = Home.route,
+        enterTransition = {
+            fadeIn()
+        },
+        exitTransition = {
+            fadeOut()
+        },
+        modifier = modifier
+    ) {
         composable(Home.route) {
             HomeScreen(
                 onSearchClick = { navHostController.navigate(SearchDestinationRoute) },
