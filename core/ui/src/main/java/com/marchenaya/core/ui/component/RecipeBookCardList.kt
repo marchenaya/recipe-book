@@ -33,9 +33,9 @@ fun RecipeBookCardList(
 ) {
     when (items.loadState.refresh) {
         LoadState.Loading -> {
-            //todo : change all loaders place and add a placeholder for all the images
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
                 modifier = modifier.fillMaxSize()
             ) {
                 CircularProgressIndicator()

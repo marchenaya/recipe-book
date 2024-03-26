@@ -1,5 +1,6 @@
 package com.marchenaya.core.ui.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,12 +20,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.marchenaya.ui.R
 
 private const val ImageBaseHeight = 200
@@ -41,14 +47,30 @@ fun RecipeBookLargeTopBar(
     val imageHeight = (1 - scrollBehavior.state.collapsedFraction) * ImageBaseHeight
     val topBarHeight = (1 - scrollBehavior.state.collapsedFraction) * TopBarBaseHeight
     Box(modifier = Modifier.fillMaxWidth()) {
-        AsyncImage(
-            model = imageUrl,
-            contentDescription = stringResource(R.string.recipe_image_description, title),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(imageHeight.dp)
+        val painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .build()
         )
+
+        if (painter.state is AsyncImagePainter.State.Error) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_placeholder_24dp),
+                contentDescription = stringResource(R.string.recipe_image_description, title),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(imageHeight.dp),
+            )
+        } else {
+            Image(
+                contentScale = ContentScale.Crop,
+                painter = painter,
+                contentDescription = stringResource(R.string.recipe_image_description, title),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(imageHeight.dp)
+            )
+        }
         LargeTopAppBar(
             title = {
                 Text(
