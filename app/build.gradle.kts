@@ -58,7 +58,6 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:shopping"))
     implementation(project(":feature:settings"))
-    implementation(project(":feature:search"))
     implementation(project(":feature:recipe"))
     implementation(project(":core:ui"))
 

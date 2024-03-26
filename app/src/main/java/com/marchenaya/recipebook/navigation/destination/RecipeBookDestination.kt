@@ -17,8 +17,6 @@ abstract class RecipeBookDestination {
                 Settings.route -> Settings
                 Recipe.route -> Recipe
                 Instructions.route -> Instructions
-                Search.route -> Search
-                Filter.route -> Filter
                 else -> null
             }
         }

@@ -1,9 +1,6 @@
 package com.marchenaya.home
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,7 +19,6 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun HomeScreen(
-    onSearchClick: () -> Unit,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
@@ -33,7 +29,6 @@ fun HomeScreen(
 
     HomeContentScreen(
         randomRecipesPagingItems = randomRecipesPagingItems,
-        onSearchClick = onSearchClick,
         onRecipeClick = onRecipeClick,
         modifier = modifier
     )
@@ -43,26 +38,14 @@ fun HomeScreen(
 @Composable
 fun HomeContentScreen(
     randomRecipesPagingItems: LazyPagingItems<Recipe>,
-    onSearchClick: () -> Unit,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column {
-
-        Button(
-            onClick = { onSearchClick() },
-            modifier = Modifier.padding(top = 8.dp, start = 8.dp)
-        ) {
-            Text(text = "Navigate to Search")
-        }
-
-        RecipeBookCardList(
-            items = randomRecipesPagingItems,
-            onRecipeClick,
-            modifier.padding(top = 8.dp)
-        )
-
-    }
+    RecipeBookCardList(
+        items = randomRecipesPagingItems,
+        onRecipeClick,
+        modifier.padding(top = 8.dp)
+    )
 }
 
 @Preview
@@ -88,6 +71,6 @@ fun HomeContentScreenPreview() {
                         )
                     }
                 )
-            ).collectAsLazyPagingItems(), {}, {})
+            ).collectAsLazyPagingItems(), {})
     }
 }

@@ -194,14 +194,6 @@ private fun SuccessContent(
                 }
             }
         }
-        item {
-            Button(
-                onClick = { onInstructionsClick() },
-                Modifier.padding(start = 8.dp, top = 8.dp)
-            ) {
-                Text(text = "Navigate to Instructions Screen")
-            }
-        }
     }
 }
 
