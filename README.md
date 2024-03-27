@@ -1,6 +1,6 @@
 # Recipe Book
 
-This project displays random recipes from [Spoonacular API](https://spoonacular.com/food-api)
+This project displays random recipes from the [Spoonacular API](https://spoonacular.com/food-api) and stores them locally for offline access.
 
 What was used :
 - Coroutines
