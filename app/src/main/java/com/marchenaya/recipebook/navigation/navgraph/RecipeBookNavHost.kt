@@ -7,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.marchenaya.home.HomeScreen
 import com.marchenaya.recipebook.navigation.destination.Home
-import com.marchenaya.recipebook.navigation.destination.Instructions
 import com.marchenaya.recipebook.navigation.destination.RoutingRecipePrefix
 import com.marchenaya.recipebook.navigation.destination.Settings
 import com.marchenaya.recipebook.navigation.destination.Shopping
@@ -34,13 +33,8 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
         composable(Settings.route) {
             SettingsScreen()
         }
-        recipeGraph(
-            onInstructionsClick = {
-                navHostController.navigate(Instructions.route)
-            },
-            onBackClick = {
-                navHostController.popBackStack()
-            }
-        )
+        recipeGraph {
+            navHostController.popBackStack()
+        }
     }
 }

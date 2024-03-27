@@ -10,15 +10,15 @@ data class Recipe(
     val instructions: Map<String, List<Instruction>>
 ) {
 
-    fun cookingTimeToHoursAndMinutes(): String {
+    fun cookingTimeToHoursAndMinutes(hourAbbreviation: String, minuteAbbreviation: String): String {
         val hours = (cookingTime / 60)
         val minutes = cookingTime - hours * 60
         return if (hours == 0) {
-            "$minutes min"
+            "$minutes $minuteAbbreviation"
         } else if (minutes == 0) {
-            "$hours h"
+            "$hours $hourAbbreviation"
         } else {
-            "$hours h $minutes min"
+            "$hours $hourAbbreviation $minutes $minuteAbbreviation"
         }
     }
 

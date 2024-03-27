@@ -42,7 +42,7 @@ fun RecipeBookTopBar(
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Localized description",
+                        contentDescription = stringResource(com.marchenaya.ui.R.string.back_arrow),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }

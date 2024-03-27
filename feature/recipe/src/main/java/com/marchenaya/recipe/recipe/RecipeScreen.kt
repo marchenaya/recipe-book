@@ -120,7 +120,10 @@ private fun SuccessContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RecipeBookIconText(
-                    text = recipe.cookingTimeToHoursAndMinutes(),
+                    text = recipe.cookingTimeToHoursAndMinutes(
+                        stringResource(com.marchenaya.recipe.R.string.hour_abbreviation),
+                        stringResource(com.marchenaya.recipe.R.string.minute_abbreviation)
+                    ),
                     icon = Icons.Rounded.Timer,
                     iconContentDescription = stringResource(com.marchenaya.recipe.R.string.preparation_time_icon_description),
                     modifier = Modifier.padding(start = 8.dp)
@@ -169,7 +172,10 @@ private fun SuccessContent(
                             .padding(8.dp)
                     )
                     RecipeBookText(
-                        text = "Instructions for $instructionsName",
+                        text = stringResource(
+                            com.marchenaya.recipe.R.string.instruction_name_placeholder,
+                            instructionsName
+                        ),
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
@@ -178,7 +184,10 @@ private fun SuccessContent(
                 }
                 instructions[instructionsName]?.forEach { instruction ->
                     RecipeBookText(
-                        text = "Step n°${instruction.id}",
+                        text = stringResource(
+                            com.marchenaya.recipe.R.string.instruction_step_placeholder,
+                            instruction.id
+                        ),
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)

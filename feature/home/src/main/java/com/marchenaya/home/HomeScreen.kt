@@ -64,10 +64,14 @@ fun HomeContentScreenPreview() {
                             2,
                             listOf(
                                 Ingredient(
-                                    1, "Cheese", "100.0 g"
+                                    1, stringResource(com.marchenaya.ui.R.string.ingredient_name_preview),
+                                    stringResource(
+                                        com.marchenaya.ui.R.string.ingredient_amount_preview
+                                    )
                                 )
                             ),
-                            mapOf("" to listOf(Instruction(1, "Cook")))
+                            mapOf("" to listOf(Instruction(1,
+                                stringResource(com.marchenaya.ui.R.string.instruction_preview))))
                         )
                     }
                 )

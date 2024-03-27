@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="recipe_title">Recipe</string>
-    <string name="instructions_title">Instructions</string>
-    <string name="close">Close</string>
     <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="cooking_time">Cooking time</string>
+    <string name="hour_abbreviation">h</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instruction_name_placeholder">Instructions for %1$s</string>
+    <string name="instruction_screen_preview">Hello InstructionsScreen!</string>
+    <string name="instruction_step_placeholder">Step n°%1$s</string>
+    <string name="instructions">Instructions</string>
+    <string name="instructions_title">Instructions</string>
+    <string name="minute_abbreviation">min</string>
     <string name="preparation_time">Preparation time</string>
     <string name="preparation_time_icon_description">Icon for preparation time</string>
+    <string name="recipe_title">Recipe</string>
     <string name="servings_icon_description">Icon for number of servings</string>
-    <string name="cooking_time">Cooking time</string>
     <string name="servings_template">For %1$d</string>
-    <string name="ingredients">Ingredients</string>
-    <string name="instructions">Instructions</string>
 </resources>

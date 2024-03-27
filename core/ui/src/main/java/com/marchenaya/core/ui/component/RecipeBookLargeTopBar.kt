@@ -91,7 +91,7 @@ fun RecipeBookLargeTopBar(
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Localized description",
+                        contentDescription = stringResource(id = R.string.back_arrow),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
