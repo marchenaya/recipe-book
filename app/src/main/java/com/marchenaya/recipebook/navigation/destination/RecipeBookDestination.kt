@@ -16,7 +16,6 @@ abstract class RecipeBookDestination {
                 Shopping.route -> Shopping
                 Settings.route -> Settings
                 Recipe.route -> Recipe
-                Instructions.route -> Instructions
                 else -> null
             }
         }
