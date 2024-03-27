@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -35,7 +34,7 @@ android {
         buildConfigField(
             "String",
             "API_KEY",
-            "\"f79a23ba9c8c4adbbc076edba50ea714\""
+            "\"c0c613f9a45745a4828644217fcfdf2e\""
         )//TODO : Don't keep this key here
     }
     compileOptions {

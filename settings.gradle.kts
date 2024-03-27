@@ -12,9 +12,6 @@ include(":core")
 include(":feature:recipe")
 
 
-include(":feature:search")
-
-
 include(":domain")
 
 

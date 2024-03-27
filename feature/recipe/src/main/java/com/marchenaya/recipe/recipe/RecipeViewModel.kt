@@ -2,6 +2,8 @@ package com.marchenaya.recipe.recipe
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.marchenaya.core.model.exception.recipe.RecipeIdIsNullException
+import com.marchenaya.core.model.exception.recipe.RecipeIsNullException
 import com.marchenaya.domain.usecase.GetRecipeByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +24,7 @@ class RecipeViewModel @Inject constructor(private val useCase: GetRecipeByIdUseC
                 if (recipe != null) {
                     _uiState.emit(RecipeUiState.Success(recipe))
                 } else {
-                    _uiState.emit(RecipeUiState.Error(IllegalStateException("Recipe is null")))
+                    _uiState.emit(RecipeUiState.Error(RecipeIsNullException()))
                 }
             } catch (exception: Exception) {
                 _uiState.emit(RecipeUiState.Error(exception))
@@ -32,7 +34,7 @@ class RecipeViewModel @Inject constructor(private val useCase: GetRecipeByIdUseC
 
     fun notifyRecipeIdIsNull() {
         viewModelScope.launch {
-            _uiState.emit(RecipeUiState.Error(IllegalStateException("Recipe id is null")))
+            _uiState.emit(RecipeUiState.Error(RecipeIdIsNullException()))
         }
     }
 

@@ -97,10 +97,19 @@ fun RecipeBookCardListPreview() {
                             2,
                             listOf(
                                 Ingredient(
-                                    1, "Cheese", "100.0 g"
+                                    1,
+                                    stringResource(id = R.string.ingredient_name_preview),
+                                    stringResource(id = R.string.ingredient_amount_preview)
                                 )
                             ),
-                            mapOf("" to listOf(Instruction(1, "Cook")))
+                            mapOf(
+                                "" to listOf(
+                                    Instruction(
+                                        1,
+                                        stringResource(id = R.string.instruction_preview)
+                                    )
+                                )
+                            )
                         )
                     }
                 )

@@ -1,7 +1,9 @@
 package com.marchenaya.data.mapper.database
 
+import android.content.Context
 import com.marchenaya.core.model.Instruction
 import com.marchenaya.core.model.Recipe
+import com.marchenaya.data.R
 import com.marchenaya.data.dispatcher.Dispatcher
 import com.marchenaya.data.dispatcher.Dispatchers
 import com.marchenaya.data.database.model.InstructionEntity
@@ -10,6 +12,7 @@ import com.marchenaya.data.database.relation.RecipeWithIngredientsAndInstruction
 import com.marchenaya.data.mapper.base.EntityMapper
 import com.marchenaya.data.trace.TraceComponent
 import com.marchenaya.data.trace.TraceId
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,6 +22,7 @@ class RecipeEntityDataMapper @Inject constructor(
     private val instructionEntityDataMapper: InstructionEntityDataMapper,
     private val traceComponent: TraceComponent,
     @Dispatcher(Dispatchers.Default) private val defaultDispatcher: CoroutineDispatcher,
+    @ApplicationContext private val context: Context
 ) : EntityMapper<RecipeWithIngredientsAndInstructions, Recipe>() {
 
     override suspend fun transformEntityToModel(input: RecipeWithIngredientsAndInstructions): Recipe =
@@ -49,7 +53,7 @@ class RecipeEntityDataMapper @Inject constructor(
         }
 
     override fun onMappingError(exception: Exception) {
-        traceComponent.traceError(TraceId.ENTITY_MAPPER_RECIPE, "error", exception)
+        traceComponent.traceError(TraceId.ENTITY_MAPPER_RECIPE, context.getString(R.string.error), exception)
     }
 
     private suspend fun List<InstructionEntity>.toInstructionModelMap(): Map<String, List<Instruction>> =

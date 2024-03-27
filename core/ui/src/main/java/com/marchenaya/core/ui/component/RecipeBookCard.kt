@@ -20,6 +20,9 @@ import coil.compose.AsyncImage
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.ui.R
 
+private const val CARD = "card"
+private const val TEXT = "text"
+
 @Composable
 fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
     ConstraintLayout(
@@ -27,7 +30,7 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
         modifier = Modifier.clickable { onClick() }
     ) {
         ElevatedCard(
-            modifier = Modifier.layoutId("card")
+            modifier = Modifier.layoutId(CARD)
         ) {
             AsyncImage(
                 model = cardImage,
@@ -40,7 +43,7 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
         RecipeBookText(
             text = cardText,
             modifier = Modifier
-                .layoutId("text")
+                .layoutId(TEXT)
                 .padding(top = 8.dp),
             style = MaterialTheme.typography.titleMedium
         )
@@ -48,9 +51,8 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
 }
 
 private fun recipeBookCardConstraintSet() = ConstraintSet {
-
-    val card = createRefFor("card")
-    val text = createRefFor("text")
+    val card = createRefFor(CARD)
+    val text = createRefFor(TEXT)
 
     constrain(card) {
         top.linkTo(parent.top, 8.dp)
@@ -74,3 +76,4 @@ fun RecipeBookCardPreview() {
         ) { }
     }
 }
+

@@ -10,4 +10,7 @@ sealed interface RecipeUiState {
 
     data class Error(val exception: Exception) : RecipeUiState
 
+
+
 }
+

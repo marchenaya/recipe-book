@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Recipe Book</string>
-    <string name="error">There is an error</string>
-    <string name="empty_recipes">There is no recipes</string>
-    <string name="text_preview">Hello world !</string>
-    <string name="image_preview">https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg</string>
     <string name="card_text_preview">Elephant</string>
-    <string name="recipe_image_description">Image of %1$s</string>
     <string name="content_description_preview">Content description</string>
+    <string name="empty_recipes">There is no recipes</string>
+    <string name="error">There is an error</string>
+    <string name="image_preview">https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive-960x540.jpg</string>
+    <string name="ingredient_amount_preview">100.0 g</string>
+    <string name="ingredient_name_preview">Cheese</string>
+    <string name="instruction_preview">Cook</string>
+    <string name="recipe_image_description">Image of %1$s</string>
+    <string name="text_preview">Hello world !</string>
+    <string name="back_arrow">Back arrow</string>
 </resources>
