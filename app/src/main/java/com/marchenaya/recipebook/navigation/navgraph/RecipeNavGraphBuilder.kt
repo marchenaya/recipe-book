@@ -22,7 +22,6 @@ fun NavGraphBuilder.recipeGraph(onInstructionsClick: () -> Unit, onBackClick: ()
         ) { navBackStackEntry ->
             RecipeScreen(
                 recipeId = navBackStackEntry.arguments?.getInt(ArgKeyRecipeId),
-                onInstructionsClick = { onInstructionsClick() },
                 onBackClick = { onBackClick() }
             )
         }

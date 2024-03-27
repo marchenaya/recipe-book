@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Timer
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -21,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,23 +42,24 @@ import com.marchenaya.ui.R
 @Composable
 fun RecipeScreen(
     recipeId: Int?,
-    onInstructionsClick: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: RecipeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    if (recipeId != null) {
-        viewModel.getRecipeById(recipeId)
-    } else {
-        viewModel.notifyRecipeIdIsNull()
+    LaunchedEffect(recipeId) {
+        if (recipeId != null) {
+            viewModel.getRecipeById(recipeId)
+        } else {
+            viewModel.notifyRecipeIdIsNull()
+        }
     }
 
     RecipeScreenContent(
         uiState,
-        onInstructionsClick = { onInstructionsClick() },
-        onBackClick = { onBackClick() }, modifier
+        onBackClick = { onBackClick() },
+        modifier
     )
 
 }
@@ -67,7 +68,6 @@ fun RecipeScreen(
 @Composable
 fun RecipeScreenContent(
     uiState: RecipeUiState,
-    onInstructionsClick: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -93,8 +93,7 @@ fun RecipeScreenContent(
                 SuccessContent(
                     modifier,
                     innerPadding,
-                    uiState.recipe,
-                    onInstructionsClick
+                    uiState.recipe
                 )
             }
 
@@ -108,8 +107,7 @@ fun RecipeScreenContent(
 private fun SuccessContent(
     modifier: Modifier,
     innerPadding: PaddingValues,
-    recipe: Recipe,
-    onInstructionsClick: () -> Unit
+    recipe: Recipe
 ) {
     val instructions = recipe.instructions
     LazyColumn(modifier = modifier, contentPadding = innerPadding) {
@@ -218,7 +216,6 @@ fun ErrorContent(exception: Exception) {
 fun RecipeScreenPreview() {
     RecipeScreen(
         recipeId = 0,
-        onInstructionsClick = { },
         onBackClick = { }
     )
 }
