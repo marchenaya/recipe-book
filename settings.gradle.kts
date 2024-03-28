@@ -1,5 +1,32 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":core:model")
+
+
+include(":core:ui")
+
+
+include(":core")
+
+
+include(":feature:recipe")
+
+
+include(":domain")
+
+
+include(":data")
+
+
+include(":feature:shopping")
+
+
+include(":feature:settings")
+
+
+include(":feature:home")
+
+
 pluginManagement {
     repositories {
         google()

@@ -1,0 +1,12 @@
+<resources>
+    <string name="hour_abbreviation">h</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instruction_name_placeholder">Instructions for %1$s</string>
+    <string name="instruction_step_placeholder">Step n°%1$s</string>
+    <string name="instructions">Instructions</string>
+    <string name="minute_abbreviation">min</string>
+    <string name="preparation_time_icon_description">Icon for preparation time</string>
+    <string name="recipe_title">Recipe</string>
+    <string name="servings_icon_description">Icon for number of servings</string>
+    <string name="servings_template">For %1$d</string>
+</resources>
