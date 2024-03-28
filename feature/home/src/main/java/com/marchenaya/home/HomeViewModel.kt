@@ -13,14 +13,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    getRandomRecipesUseCase: GetRandomRecipesUseCase
+    private val getRandomRecipesUseCase: GetRandomRecipesUseCase
 ) : ViewModel() {
 
     private val _randomRecipesUiState: MutableStateFlow<PagingData<RecipeModel>> =
         MutableStateFlow(value = PagingData.empty())
     val randomRecipesUiState: MutableStateFlow<PagingData<RecipeModel>> get() = _randomRecipesUiState
 
-    init {
+    fun retrieveRandomRecipes() {
         viewModelScope.launch {
             getRandomRecipesUseCase().collectLatest { pagingData ->
                 _randomRecipesUiState.emit(pagingData)
