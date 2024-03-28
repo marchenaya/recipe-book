@@ -8,8 +8,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import com.marchenaya.ui.R
 import com.marchenaya.core.ui.theme.RecipeBookTheme
+import com.marchenaya.ui.R
 
 @Composable
 fun RecipeBookText(
@@ -31,7 +31,7 @@ fun RecipeBookText(
 fun RecipeBookTextPreview() {
     RecipeBookTheme {
         RecipeBookText(
-            text = stringResource(R.string.text_preview),
+            text = stringResource(R.string.recipe_title_preview),
             style = MaterialTheme.typography.titleLarge
         )
     }

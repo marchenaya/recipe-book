@@ -26,7 +26,7 @@ object NetworkingModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class RecipesRetrofit
+    annotation class RecipeRetrofit
 
     @Singleton
     @Provides
@@ -45,8 +45,8 @@ object NetworkingModule {
     fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
-    @RecipesRetrofit
-    fun provideRecipesRetrofit(
+    @RecipeRetrofit
+    fun provideRecipeRetrofit(
         okHttpClient: OkHttpClient,
         gson: Gson
     ): Retrofit {
@@ -59,6 +59,6 @@ object NetworkingModule {
     }
 
     @Provides
-    fun provideRecipesApi(@RecipesRetrofit retrofit: Retrofit): RecipesApi = retrofit.create()
+    fun provideRecipesApi(@RecipeRetrofit retrofit: Retrofit): RecipesApi = retrofit.create()
 
 }

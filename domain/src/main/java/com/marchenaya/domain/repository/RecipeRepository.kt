@@ -1,13 +1,13 @@
 package com.marchenaya.domain.repository
 
 import androidx.paging.PagingData
-import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.model.RecipeModel
 import kotlinx.coroutines.flow.Flow
 
 interface RecipeRepository {
 
-    fun getRandomRecipes(): Flow<PagingData<Recipe>>
+    fun getRandomRecipes(): Flow<PagingData<RecipeModel>>
 
-    suspend fun getRecipeById(id: Int): Recipe?
+    suspend fun getRecipeById(id: Int): RecipeModel?
 
 }

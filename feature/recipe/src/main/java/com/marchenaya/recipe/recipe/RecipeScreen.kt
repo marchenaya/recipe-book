@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -33,10 +35,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.model.RecipeModel
 import com.marchenaya.core.ui.component.RecipeBookIconText
 import com.marchenaya.core.ui.component.RecipeBookLargeTopBar
 import com.marchenaya.core.ui.component.RecipeBookText
+import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.ui.R
 
 @Composable
@@ -82,8 +85,8 @@ fun RecipeScreenContent(
                     RecipeBookLargeTopBar(
                         onNavigationClick = { onBackClick() },
                         scrollBehavior = scrollBehavior,
-                        title = uiState.recipe.title,
-                        imageUrl = uiState.recipe.imageUrl ?: ""
+                        title = uiState.recipeModel.title,
+                        imageUrl = uiState.recipeModel.imageUrl ?: ""
                     )
                 },
                 modifier = modifier
@@ -93,7 +96,7 @@ fun RecipeScreenContent(
                 SuccessContent(
                     modifier,
                     innerPadding,
-                    uiState.recipe
+                    uiState.recipeModel
                 )
             }
 
@@ -107,9 +110,9 @@ fun RecipeScreenContent(
 private fun SuccessContent(
     modifier: Modifier,
     innerPadding: PaddingValues,
-    recipe: Recipe
+    recipeModel: RecipeModel
 ) {
-    val instructions = recipe.instructions
+    val instructions = recipeModel.instructions
     LazyColumn(modifier = modifier, contentPadding = innerPadding) {
         item {
             Row(
@@ -120,7 +123,7 @@ private fun SuccessContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RecipeBookIconText(
-                    text = recipe.cookingTimeToHoursAndMinutes(
+                    text = recipeModel.cookingTimeToHoursAndMinutes(
                         stringResource(com.marchenaya.recipe.R.string.hour_abbreviation),
                         stringResource(com.marchenaya.recipe.R.string.minute_abbreviation)
                     ),
@@ -131,7 +134,7 @@ private fun SuccessContent(
                 RecipeBookIconText(
                     text = stringResource(
                         com.marchenaya.recipe.R.string.servings_template,
-                        recipe.servings
+                        recipeModel.servings
                     ),
                     icon = ImageVector.vectorResource(id = R.drawable.ic_people_24dp),
                     iconContentDescription = stringResource(com.marchenaya.recipe.R.string.servings_icon_description)
@@ -144,7 +147,7 @@ private fun SuccessContent(
                 modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp, top = 16.dp)
             )
         }
-        items(recipe.ingredients) { ingredient ->
+        items(recipeModel.ingredientModels) { ingredient ->
             Text(
                 text = "${ingredient.amount} ${ingredient.name}",
                 Modifier.padding(horizontal = 8.dp)
@@ -200,6 +203,9 @@ private fun SuccessContent(
                     )
                 }
             }
+            item{
+                Spacer(modifier = modifier.height(16.dp))
+            }
         }
     }
 }
@@ -222,9 +228,11 @@ fun ErrorContent(exception: Exception) {
 
 @Preview
 @Composable
-fun RecipeScreenPreview() {
-    RecipeScreen(
-        recipeId = 0,
-        onBackClick = { }
-    )
+fun RecipeScreenContentPreview() {
+    RecipeBookTheme {
+        RecipeScreenContent(RecipeUiState.Success(
+            RecipeModel.recipePreview
+        ), {})
+    }
+
 }

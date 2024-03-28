@@ -3,7 +3,7 @@ package com.marchenaya.core.ui.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.DateRange
+import androidx.compose.material.icons.rounded.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -48,8 +48,8 @@ fun RecipeBookIconText(
 fun RecipeBookIconTimePreview() {
     RecipeBookTheme {
         RecipeBookIconText(
-            text = stringResource(id = R.string.text_preview),
-            icon = Icons.Rounded.DateRange,
+            text = stringResource(R.string.icon_text_preview),
+            icon = Icons.Rounded.Timer,
             iconContentDescription = stringResource(id = R.string.content_description_preview)
         )
     }

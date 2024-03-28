@@ -1,3 +1,3 @@
-package com.marchenaya.core.model.exception.recipe
+package com.marchenaya.recipe.recipe.exception
 
 class RecipeIsNullException : IllegalStateException("Recipe is null")

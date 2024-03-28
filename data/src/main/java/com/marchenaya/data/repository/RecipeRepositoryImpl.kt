@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.model.RecipeModel
 import com.marchenaya.data.database.datasource.RecipeLocalDataSource
 import com.marchenaya.data.dispatcher.Dispatcher
 import com.marchenaya.data.dispatcher.Dispatchers
@@ -31,14 +31,14 @@ class RecipeRepositoryImpl @Inject constructor(
     @Dispatcher(Dispatchers.IO) private val ioDispatcher: CoroutineDispatcher
 ) : RecipeRepository {
 
-    override fun getRandomRecipes(): Flow<PagingData<Recipe>> {
+    override fun getRandomRecipes(): Flow<PagingData<RecipeModel>> {
         return Pager(
             config = PagingConfig(NETWORK_PAGE_SIZE),
             pagingSourceFactory = { randomRecipePagingSource }
         ).flow.cachedIn(CoroutineScope(ioDispatcher))
     }
 
-    override suspend fun getRecipeById(id: Int): Recipe? {
+    override suspend fun getRecipeById(id: Int): RecipeModel? {
         return if (networkManager.isNetworkAvailable()) {
             try {
                 val recipe = remoteDataSource.getRecipeById(id)
@@ -64,7 +64,7 @@ class RecipeRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun getLocalRecipeById(id: Int): Recipe? =
+    private suspend fun getLocalRecipeById(id: Int): RecipeModel? =
         localDataSource.getRecipeById(id)?.let { recipeEntity ->
             recipeEntityDataMapper.transformEntityToModel(recipeEntity)
         }

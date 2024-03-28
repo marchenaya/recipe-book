@@ -1,7 +1,7 @@
 package com.marchenaya.core.ui.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -29,15 +29,14 @@ fun RecipeBookCard(cardImage: String, cardText: String, onClick: () -> Unit) {
         constraintSet = recipeBookCardConstraintSet(),
         modifier = Modifier.clickable { onClick() }
     ) {
-        ElevatedCard(
-            modifier = Modifier.layoutId(CARD)
-        ) {
+        ElevatedCard(modifier = Modifier.layoutId(CARD)) {
             AsyncImage(
                 model = cardImage,
                 contentDescription = cardText,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize(),
-                error = painterResource(id = R.drawable.ic_placeholder_24dp)
+                modifier = Modifier.height(260.dp),
+                error = painterResource(id = R.drawable.ic_placeholder_24dp),
+                placeholder = painterResource(id = R.drawable.ic_placeholder_24dp)
             )
         }
         RecipeBookText(
@@ -72,8 +71,8 @@ fun RecipeBookCardPreview() {
     RecipeBookTheme {
         RecipeBookCard(
             cardImage = stringResource(R.string.image_preview),
-            cardText = stringResource(R.string.card_text_preview)
-        ) { }
+            cardText = stringResource(R.string.recipe_title_preview)
+        ) {}
     }
 }
 

@@ -14,8 +14,8 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindTelepeageRecipesRepository(
-        recipesRepositoryImpl: RecipeRepositoryImpl
+    abstract fun bindRecipeRepository(
+        recipeRepositoryImpl: RecipeRepositoryImpl
     ): RecipeRepository
 
 }

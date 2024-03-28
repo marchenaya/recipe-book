@@ -16,8 +16,6 @@ sealed class RecipeBookTopLevelDestination : RecipeBookDestination() {
 
     companion object {
         val bottomBarScreens = listOf(Home, Shopping, Settings)
-
-
     }
 
 }

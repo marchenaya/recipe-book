@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.recipebook.navigation.destination.Home
 import com.marchenaya.recipebook.navigation.destination.RecipeBookDestination
 import com.marchenaya.recipebook.navigation.destination.RecipeBookTopLevelDestination
@@ -19,8 +20,8 @@ fun RecipeBookBottomBar(
     currentDestination: RecipeBookDestination?,
     onNavigateToDestination: (RecipeBookTopLevelDestination) -> Unit
 ) {
-    if (currentDestination?.route in destinations.map {
-            it.route
+    if (currentDestination?.route in destinations.map { destination ->
+            destination.route
         }) {
         NavigationBar {
             destinations.forEach { destination ->
@@ -45,8 +46,10 @@ fun RecipeBookBottomBar(
 @Preview
 @Composable
 fun RecipeBookNavigationBarPreview() {
-    RecipeBookBottomBar(
-        listOf(Home, Shopping, Settings),
-        Home
-    ) {}
+    RecipeBookTheme {
+        RecipeBookBottomBar(
+            listOf(Home, Shopping, Settings),
+            Home
+        ) {}
+    }
 }

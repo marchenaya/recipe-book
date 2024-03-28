@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material.iconsExtended)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
