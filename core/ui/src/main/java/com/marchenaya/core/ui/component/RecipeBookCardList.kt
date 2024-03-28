@@ -15,19 +15,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.marchenaya.core.model.Ingredient
-import com.marchenaya.core.model.Instruction
-import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.model.RecipeModel
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.ui.R
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun RecipeBookCardList(
-    items: LazyPagingItems<Recipe>,
+    items: LazyPagingItems<RecipeModel>,
     onCardClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -89,29 +88,13 @@ fun RecipeBookCardListPreview() {
             flowOf(
                 PagingData.from(
                     MutableList(10) {
-                        Recipe(
-                            1,
-                            stringResource(id = R.string.card_text_preview),
-                            stringResource(id = R.string.image_preview),
-                            160,
-                            2,
-                            listOf(
-                                Ingredient(
-                                    1,
-                                    stringResource(id = R.string.ingredient_name_preview),
-                                    stringResource(id = R.string.ingredient_amount_preview)
-                                )
-                            ),
-                            mapOf(
-                                "" to listOf(
-                                    Instruction(
-                                        1,
-                                        stringResource(id = R.string.instruction_preview)
-                                    )
-                                )
-                            )
-                        )
-                    }
+                        RecipeModel.recipePreview
+                    },
+                    sourceLoadStates = LoadStates(
+                        LoadState.NotLoading(false),
+                        LoadState.NotLoading(false),
+                        LoadState.NotLoading(false)
+                    )
                 )
             ).collectAsLazyPagingItems(),
             {}

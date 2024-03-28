@@ -2,9 +2,9 @@ package com.marchenaya.data.mapper.base
 
 abstract class EntityMapper<K : Any, T : Any> {
     suspend fun transformModelList(input: List<T>): List<K> {
-        return input.mapNotNull {
+        return input.mapNotNull { model ->
             try {
-                transformModelToEntity(it)
+                transformModelToEntity(model)
             } catch (exception: Exception) {
                 onMappingError(exception)
                 null
@@ -13,9 +13,9 @@ abstract class EntityMapper<K : Any, T : Any> {
     }
 
     suspend fun transformEntityList(input: List<K>): List<T> {
-        return input.mapNotNull {
+        return input.mapNotNull { entity ->
             try {
-                transformEntityToModel(it)
+                transformEntityToModel(entity)
             } catch (exception: Exception) {
                 onMappingError(exception)
                 null

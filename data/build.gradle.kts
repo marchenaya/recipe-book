@@ -31,11 +31,13 @@ android {
     }
     buildTypes.all {
         buildConfigField("String", "BASE_URL", "\"https://api.spoonacular.com\"")
+        //For a future version, put this key in a properties file, encrypt this file in base64
+        // and import it in the "Actions secrets and variables section" and finally setup an Action
         buildConfigField(
             "String",
             "API_KEY",
             "\"c0c613f9a45745a4828644217fcfdf2e\""
-        )//TODO : Don't keep this key here
+        )
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

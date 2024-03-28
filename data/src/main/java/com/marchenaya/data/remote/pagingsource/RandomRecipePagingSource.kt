@@ -2,11 +2,9 @@ package com.marchenaya.data.remote.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.model.RecipeModel
 import com.marchenaya.data.database.datasource.RecipeLocalDataSource
 import com.marchenaya.data.database.relation.RecipeWithIngredientsAndInstructions
-import com.marchenaya.data.dispatcher.Dispatcher
-import com.marchenaya.data.dispatcher.Dispatchers
 import com.marchenaya.data.exception.OverQuotaException
 import com.marchenaya.data.exception.ServerException
 import com.marchenaya.data.mapper.database.RecipeEntityDataMapper
@@ -14,8 +12,6 @@ import com.marchenaya.data.mapper.remote.RecipeRemoteDataMapper
 import com.marchenaya.data.remote.datasource.RecipeRemoteDataSource
 import com.marchenaya.data.remote.network.NetworkManager
 import com.marchenaya.data.repository.RecipeRepositoryImpl.Companion.NETWORK_PAGE_SIZE
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -26,16 +22,15 @@ class RandomRecipePagingSource @Inject constructor(
     private val recipeEntityDataMapper: RecipeEntityDataMapper,
     private val recipeRemoteDataMapper: RecipeRemoteDataMapper,
     private val networkManager: NetworkManager,
-    @Dispatcher(Dispatchers.Default) private val defaultDispatcher: CoroutineDispatcher,
-) : PagingSource<Int, Recipe>() {
+) : PagingSource<Int, RecipeModel>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Recipe>): Int? =
+    override fun getRefreshKey(state: PagingState<Int, RecipeModel>): Int? =
         state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Recipe> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RecipeModel> {
         val position = params.key ?: STARTING_PAGE_INDEX
         return try {
             if (networkManager.isNetworkAvailable()) {
@@ -68,18 +63,16 @@ class RandomRecipePagingSource @Inject constructor(
     }
 
     private suspend fun saveRecipes(recipeEntityList: List<RecipeWithIngredientsAndInstructions>) {
-        withContext(defaultDispatcher) {
-            recipeEntityList.forEach { recipe ->
-                localDataSource.saveRecipe(
-                    recipe.recipeEntity,
-                    recipe.ingredientEntityList,
-                    recipe.instructionEntityList
-                )
-            }
+        recipeEntityList.forEach { recipe ->
+            localDataSource.saveRecipe(
+                recipe.recipeEntity,
+                recipe.ingredientEntityList,
+                recipe.instructionEntityList
+            )
         }
     }
 
-    private suspend fun loadLocalData(position: Int): LoadResult.Page<Int, Recipe> =
+    private suspend fun loadLocalData(position: Int): LoadResult.Page<Int, RecipeModel> =
         LoadResult.Page(
             data = recipeEntityDataMapper.transformEntityList(localDataSource.getRecipeList()),
             prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,

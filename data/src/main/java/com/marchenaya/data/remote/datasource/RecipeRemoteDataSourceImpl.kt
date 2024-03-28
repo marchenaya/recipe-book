@@ -22,18 +22,18 @@ class RecipeRemoteDataSourceImpl @Inject constructor(
     override suspend fun getRandomRecipes(): List<RecipeRemote> =
         withContext(ioDispatcher) {
             val response = api.getRandomRecipes()
-            checkCode(response)
+            handleException(response)
             response.body()?.recipeRemoteList ?: emptyList()
         }
 
     override suspend fun getRecipeById(id: Int): RecipeRemote? =
         withContext(ioDispatcher) {
             val response = api.getRecipeById(id)
-            checkCode(response)
+            handleException(response)
             response.body()
         }
 
-    private fun <T> checkCode(response: Response<T>) {
+    private fun <T> handleException(response: Response<T>) {
         if (!response.isSuccessful) {
             when (response.code()) {
                 402 -> throw OverQuotaException()

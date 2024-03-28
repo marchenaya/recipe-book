@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.ui.R
 
 private const val ImageBaseHeight = 200
@@ -49,7 +50,8 @@ fun RecipeBookLargeTopBar(
         val painter = rememberAsyncImagePainter(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)
-                .build()
+                .build(),
+            placeholder = painterResource(id = R.drawable.ic_placeholder_24dp)
         )
 
         if (painter.state is AsyncImagePainter.State.Error) {
@@ -58,7 +60,7 @@ fun RecipeBookLargeTopBar(
                 contentDescription = stringResource(R.string.recipe_image_description, title),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(imageHeight.dp),
+                    .height(imageHeight.dp)
             )
         } else {
             Image(
@@ -103,13 +105,15 @@ fun RecipeBookLargeTopBar(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun RecipeBookLargeTopBarPreview() {
-    RecipeBookLargeTopBar(
-        {},
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(),
-        stringResource(id = R.string.text_preview),
-        stringResource(id = R.string.image_preview)
-    )
+    RecipeBookTheme {
+        RecipeBookLargeTopBar(
+            {},
+            TopAppBarDefaults.exitUntilCollapsedScrollBehavior(),
+            stringResource(id = R.string.recipe_title_preview),
+            stringResource(id = R.string.image_preview)
+        )
+    }
 }

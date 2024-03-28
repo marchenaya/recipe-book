@@ -3,9 +3,9 @@ package com.marchenaya.data.mapper.base
 abstract class RemoteMapper<K : Any?, T : Any?> {
 
     suspend fun transformModelList(input: List<T>): List<K> {
-        return input.mapNotNull {
+        return input.mapNotNull { model ->
             try {
-                transformModelToRemote(it)
+                transformModelToRemote(model)
             } catch (exception: Exception) {
                 onMappingError(exception)
                 null
@@ -14,9 +14,9 @@ abstract class RemoteMapper<K : Any?, T : Any?> {
     }
 
     suspend fun transformRemoteList(input: List<K>): List<T> {
-        return input.mapNotNull {
+        return input.mapNotNull { remote ->
             try {
-                transformRemoteToModel(it)
+                transformRemoteToModel(remote)
             } catch (exception: Exception) {
                 onMappingError(exception)
                 null

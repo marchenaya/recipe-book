@@ -3,16 +3,15 @@ package com.marchenaya.home
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.marchenaya.core.model.Ingredient
-import com.marchenaya.core.model.Instruction
-import com.marchenaya.core.model.Recipe
+import com.marchenaya.core.model.RecipeModel
 import com.marchenaya.core.ui.component.RecipeBookCardList
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import kotlinx.coroutines.flow.flowOf
@@ -24,7 +23,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val randomRecipesPagingItems: LazyPagingItems<Recipe> =
+    val randomRecipesPagingItems: LazyPagingItems<RecipeModel> =
         viewModel.randomRecipesUiState.collectAsLazyPagingItems()
 
     HomeContentScreen(
@@ -37,7 +36,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeContentScreen(
-    randomRecipesPagingItems: LazyPagingItems<Recipe>,
+    randomRecipesPagingItems: LazyPagingItems<RecipeModel>,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -56,24 +55,13 @@ fun HomeContentScreenPreview() {
             flowOf(
                 PagingData.from(
                     MutableList(10) {
-                        Recipe(
-                            1,
-                            stringResource(id = com.marchenaya.ui.R.string.card_text_preview),
-                            stringResource(id = com.marchenaya.ui.R.string.image_preview),
-                            160,
-                            2,
-                            listOf(
-                                Ingredient(
-                                    1, stringResource(com.marchenaya.ui.R.string.ingredient_name_preview),
-                                    stringResource(
-                                        com.marchenaya.ui.R.string.ingredient_amount_preview
-                                    )
-                                )
-                            ),
-                            mapOf("" to listOf(Instruction(1,
-                                stringResource(com.marchenaya.ui.R.string.instruction_preview))))
-                        )
-                    }
+                        RecipeModel.recipePreview
+                    },
+                    sourceLoadStates = LoadStates(
+                        LoadState.NotLoading(false),
+                        LoadState.NotLoading(false),
+                        LoadState.NotLoading(false)
+                    )
                 )
             ).collectAsLazyPagingItems(), {})
     }
