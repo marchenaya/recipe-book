@@ -1,7 +1,7 @@
 package com.marchenaya.data.mapper.database
 
 import android.content.Context
-import com.marchenaya.core.model.InstructionModel
+import com.marchenaya.domain.model.InstructionModel
 import com.marchenaya.data.R
 import com.marchenaya.data.database.model.InstructionEntity
 import com.marchenaya.data.mapper.base.EntityMapper

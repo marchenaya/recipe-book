@@ -2,7 +2,7 @@ package com.marchenaya.data.remote.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.marchenaya.core.model.RecipeModel
+import com.marchenaya.domain.model.RecipeModel
 import com.marchenaya.data.database.datasource.RecipeLocalDataSource
 import com.marchenaya.data.database.relation.RecipeWithIngredientsAndInstructions
 import com.marchenaya.data.exception.OverQuotaException

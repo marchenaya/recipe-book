@@ -1,7 +1,7 @@
 package com.marchenaya.domain.usecase
 
 import androidx.paging.PagingData
-import com.marchenaya.core.model.RecipeModel
+import com.marchenaya.domain.model.RecipeModel
 import com.marchenaya.domain.repository.RecipeRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

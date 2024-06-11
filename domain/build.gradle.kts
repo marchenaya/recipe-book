@@ -24,7 +24,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 dependencies {
 
-    implementation(project(":core:model"))
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.paging.common.ktx)
     implementation(libs.javax.inject)

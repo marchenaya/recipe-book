@@ -43,7 +43,6 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":core:ui"))
-    implementation(project(":core:model"))
 
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))

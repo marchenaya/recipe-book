@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":core:model")
-
 
 include(":core:ui")
 

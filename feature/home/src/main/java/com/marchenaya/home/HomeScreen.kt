@@ -16,10 +16,12 @@ import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.marchenaya.core.model.RecipeModel
+import androidx.paging.map
 import com.marchenaya.core.ui.component.RecipeBookCardList
+import com.marchenaya.core.ui.model.UiCardModel
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 @Composable
 fun HomeScreen(
@@ -32,8 +34,16 @@ fun HomeScreen(
         mutableStateOf(false)
     }
 
-    val randomRecipesPagingItems: LazyPagingItems<RecipeModel> =
-        viewModel.randomRecipesUiState.collectAsLazyPagingItems()
+    val randomRecipesPagingItems: LazyPagingItems<UiCardModel> =
+        viewModel.randomRecipesUiState.map { pagingData ->
+            pagingData.map { recipeModel ->
+                UiCardModel(
+                    recipeModel.id,
+                    recipeModel.title,
+                    recipeModel.imageUrl
+                )
+            }
+        }.collectAsLazyPagingItems()
 
     LaunchedEffect(Unit) {
         if (!isRetrieveRandomRecipesCalled) {
@@ -52,7 +62,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeContentScreen(
-    randomRecipesPagingItems: LazyPagingItems<RecipeModel>,
+    randomRecipesPagingItems: LazyPagingItems<UiCardModel>,
     onRecipeClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -71,7 +81,7 @@ fun HomeContentScreenPreview() {
             flowOf(
                 PagingData.from(
                     MutableList(10) {
-                        RecipeModel.recipePreview
+                        UiCardModel.uiCardPreview
                     },
                     sourceLoadStates = LoadStates(
                         LoadState.NotLoading(false),

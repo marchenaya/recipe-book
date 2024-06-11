@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.marchenaya.core.model.RecipeModel
+import com.marchenaya.domain.model.RecipeModel
 import com.marchenaya.data.database.datasource.RecipeLocalDataSource
 import com.marchenaya.data.dispatcher.Dispatcher
 import com.marchenaya.data.dispatcher.Dispatchers
