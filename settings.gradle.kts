@@ -1,5 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":app")
+
 
 include(":core:ui")
 
@@ -41,4 +43,3 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Recipe Book"
-include(":app")
