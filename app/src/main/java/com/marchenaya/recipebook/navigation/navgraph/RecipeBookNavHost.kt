@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.marchenaya.home.HomeScreen
 import com.marchenaya.recipebook.navigation.destination.Home
 import com.marchenaya.recipebook.navigation.destination.RoutingRecipePrefix
+import com.marchenaya.recipebook.navigation.destination.SearchDestinationRoute
 import com.marchenaya.recipebook.navigation.destination.Settings
 import com.marchenaya.recipebook.navigation.destination.Shopping
 import com.marchenaya.settings.SettingsScreen
@@ -24,6 +25,9 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
             HomeScreen(
                 onRecipeClick = { recipeId ->
                     navHostController.navigate("$RoutingRecipePrefix$recipeId")
+                },
+                onSearchClick = {
+                    navHostController.navigate(SearchDestinationRoute)
                 }
             )
         }
@@ -35,6 +39,9 @@ fun RecipeBookNavHost(navHostController: NavHostController, modifier: Modifier =
         }
         recipeGraph {
             navHostController.popBackStack()
+        }
+        searchGraph { recipeId ->
+            navHostController.navigate("$RoutingRecipePrefix$recipeId")
         }
     }
 }

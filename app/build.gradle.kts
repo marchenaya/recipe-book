@@ -58,6 +58,7 @@ dependencies {
     implementation(project(":feature:shopping"))
     implementation(project(":feature:settings"))
     implementation(project(":feature:recipe"))
+    implementation(project(":feature:search"))
     implementation(project(":core:ui"))
 
     implementation(libs.core.ktx)

@@ -26,6 +26,7 @@ include(":feature:settings")
 
 include(":feature:home")
 
+include(":feature:search")
 
 pluginManagement {
     repositories {
