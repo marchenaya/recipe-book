@@ -35,7 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.marchenaya.core.model.RecipeModel
+import com.marchenaya.domain.model.RecipeModel
 import com.marchenaya.core.ui.component.RecipeBookIconText
 import com.marchenaya.core.ui.component.RecipeBookLargeTopBar
 import com.marchenaya.core.ui.component.RecipeBookText

@@ -19,14 +19,14 @@ import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.marchenaya.core.model.RecipeModel
+import com.marchenaya.core.ui.model.UiCardModel
 import com.marchenaya.core.ui.theme.RecipeBookTheme
 import com.marchenaya.ui.R
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun RecipeBookCardList(
-    items: LazyPagingItems<RecipeModel>,
+    items: LazyPagingItems<UiCardModel>,
     onCardClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -88,7 +88,7 @@ fun RecipeBookCardListPreview() {
             flowOf(
                 PagingData.from(
                     MutableList(10) {
-                        RecipeModel.recipePreview
+                        UiCardModel.uiCardPreview
                     },
                     sourceLoadStates = LoadStates(
                         LoadState.NotLoading(false),

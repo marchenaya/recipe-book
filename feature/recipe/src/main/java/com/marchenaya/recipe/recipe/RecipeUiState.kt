@@ -1,6 +1,6 @@
 package com.marchenaya.recipe.recipe
 
-import com.marchenaya.core.model.RecipeModel
+import com.marchenaya.domain.model.RecipeModel
 
 sealed interface RecipeUiState {
 

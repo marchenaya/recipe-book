@@ -53,7 +53,6 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":core:model"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
