@@ -1,27 +1,27 @@
 [versions]
 #AGP
-android-gradle-plugin = "8.3.1"
+android-gradle-plugin = "8.5.0"
 #Google
-ui-text-google-fonts = "1.6.4"
+ui-text-google-fonts = "1.6.8"
 #Kotlin
-org-jetbrains-kotlin-android = "1.9.23"
+org-jetbrains-kotlin-android = "2.0.0"
 kotlinx-coroutines-core = "1.8.0"
-org-jetbrains-kotlin-jvm = "1.9.22"
+org-jetbrains-kotlin-jvm = "2.0.0"
 #Hilt
-hilt-android = "2.51"
-hilt-android-compiler = "2.51"
+hilt-android = "2.51.1"
+hilt-android-compiler = "2.51.1"
 hilt-navigation-compose = "1.2.0"
 #AndroidX
-core-ktx = "1.12.0"
-lifecycle = "2.7.0"
-paging = "3.2.1"
-appcompat = "1.6.1"
+core-ktx = "1.13.1"
+lifecycle = "2.8.3"
+paging = "3.3.0"
+appcompat = "1.7.0"
 #Jetpack Compose
 compose-compiler = "1.5.11"
-compose-bom = "2024.03.00"
-compose-ui = "1.6.4"
+compose-bom = "2024.06.00"
+compose-ui = "1.6.8"
 androidx-navigation-compose = "2.7.7"
-activity-compose = "1.8.2"
+activity-compose = "1.9.0"
 constraint-layout-compose = "1.0.1"
 #Material
 material3 = "1.2.1"
@@ -34,14 +34,14 @@ coil-compose = "2.6.0"
 #Gson
 gson = "2.10.1"
 #Ksp
-ksp = "1.9.22-1.0.18"
+ksp = "2.0.0-1.0.22"
 #Java
 javax-inject = "1"
 #Room
 room-version = "2.6.1"
 #Testing
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
+androidx-test-ext-junit = "1.2.1"
+espresso-core = "3.6.1"
 junit = "4.13.2"
 material = "1.12.0"
 
@@ -108,4 +108,5 @@ org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }
 #Ksp
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-
+#Compose
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "org-jetbrains-kotlin-android" }
